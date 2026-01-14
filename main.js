@@ -1,122 +1,142 @@
-let blocoAlerta = document.querySelector(".alerta");
-let produtos = JSON.parse(localStorage.getItem('carrinho')) || [];
-let quantidade = [];
-let produtoQueCliquei = document.querySelectorAll(".produto")
-let fecharCardEscolhido = document.querySelector(".fechar-card");
 let overlay = document.querySelector(".overlay");
-let MensagemAberto = document.getElementById("aberto");
-let modalMensagem = new bootstrap.Modal(document.getElementById("meuModal"));
+let btnFecharCard = document.querySelector(".fechar-card");
+let cardAcompanhamentos = document.querySelector(".card-acompanhamentos")
 
-
-MensagemAberto.classList.add("aberto-ativo");
-function atualizarRelogio(){
-    let dataAtual = new Date();
-
-    let horaAtual = dataAtual.getHours(); 
-    
-    let relogioTexto = dataAtual.toLocaleTimeString("pt-BR", {hour: '2-digit', minute: '2-digit'});
-    document.getElementById("horario").innerHTML = relogioTexto;
+function fecharCardAberto() {
+    cardAcompanhamentos.classList.remove("acompanhamentos-ativo");
+    cardAcompanhamentos.innerHTML = ""; // Limpa o conteúdo ao fechar
+    overlay.classList.remove("overlay-ativo");
+    btnFecharCard.classList.remove("btn-ativo-card");
 }
-setInterval(atualizarRelogio, 1000);
 
-
-/***** *
-function atualizarRelogio(){
-    let dataAtual = new Date();
-
-    let horaAtual = dataAtual.getHours(); 
-    
-    let relogioTexto = dataAtual.toLocaleTimeString("pt-BR", {hour: '2-digit', minute: '2-digit'});
-    document.getElementById("horario").innerHTML = relogioTexto;
-
-    if(horaAtual >= 12 && horaAtual < 22){
-        modalMensagem.hide()
-        MensagemAberto.classList.add("aberto-ativo");
-        MensagemAberto.classList.remove("fechado-ativo");
-        MensagemAberto.innerHTML = "Estamos abertos!";
-    } else {
-        modalMensagem.show()
-        MensagemAberto.classList.remove("aberto-ativo");
-        MensagemAberto.classList.add("fechado-ativo");
-        MensagemAberto.innerHTML = "Estamos fechados!";
-    }
-}
-setInterval(atualizarRelogio, 1000);
-*****/
-
-document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("adicionar-carrinho")) {
-        blocoAlerta.classList.add("alerta-ativo")
-        
-        event.stopPropagation();
-        setTimeout(() => {
-            blocoAlerta.classList.remove("alerta-ativo")
-        }, 1000);
-        
-        let card = event.target.closest(".card");
-
-        let produto = {
-            imagem: card.querySelector("img").src,
-            nome: card.querySelector(".card-title").innerText,
-            preco: card.querySelector("#valor").innerText,
-            
+document.addEventListener("click", function (event) {
+    if (event.target.matches(".adicionar-carrinho")) {
+        const secaoAdicionarAcompanhamento = event.target.closest(".card");
+        if (secaoAdicionarAcompanhamento) {
+            const imgSrc = secaoAdicionarAcompanhamento.querySelector(".carrosel img").getAttribute("src");
+            const nomeProduto = secaoAdicionarAcompanhamento.querySelector(".card-title").innerHTML;
+            const mlDoProduto = secaoAdicionarAcompanhamento.querySelector(".alert-info").innerHTML;
+            cardAcompanhamentos.classList.add("acompanhamentos-ativo");
+            overlay.classList.add("overlay-ativo");
+            btnFecharCard.classList.add("btn-ativo-card");
+            cardAcompanhamentos.innerHTML = `
+                <div class="card text-white h-100" style="background-color: rgb(75, 0, 119);">
+                    <img src="${imgSrc}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${nomeProduto}</h5>
+                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
+                        <h2 class="text-center border-bottom pb-2">Escolha seus acompanhamentos</h2>
+                        <div class="row text-start p-3 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento1">
+                                    <label class="form-check-label" for="acompanhamento1">Banana</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento2">
+                                    <label class="form-check-label" for="acompanhamento2">Morango</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento3">
+                                    <label class="form-check-label" for="acompanhamento3">Uva</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento4">
+                                    <label class="form-check-label" for="acompanhamento4">Amendoim</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento5">
+                                    <label class="form-check-label" for="acompanhamento5">Granola</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento6">
+                                    <label class="form-check-label" for="acompanhamento6">Leite</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento7">
+                                    <label class="form-check-label" for="acompanhamento7">Leite cond.</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento8">
+                                    <label class="form-check-label" for="acompanhamento8">Gotas Chocolate</label>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="mt-3 mb-3">Adicionais</h2>
+                        <div class="row text-start p-3 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento1">
+                                    <label class="form-check-label" for="acompanhamento1">Banana</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento2">
+                                    <label class="form-check-label" for="acompanhamento2">Morango</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento3">
+                                    <label class="form-check-label" for="acompanhamento3">Uva</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento4">
+                                    <label class="form-check-label" for="acompanhamento4">Amendoim</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento5">
+                                    <label class="form-check-label" for="acompanhamento5">Granola</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento6">
+                                    <label class="form-check-label" for="acompanhamento6">Leite</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento7">
+                                    <label class="form-check-label" for="acompanhamento7">Leite cond.</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="acompanhamento8">
+                                    <label class="form-check-label" for="acompanhamento8">Gotas Chocolate</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-3">Adicionar ao carrinho</button>
+                    </div>
+                </div>`;
         }
-        produtos.push(produto)
-        localStorage.setItem('carrinho', JSON.stringify(produtos));
     }
 });
 
-produtoQueCliquei.forEach(card => {
-    card.addEventListener("click", (event) => {
 
-        if (event.target.classList.contains("slick-arrow")) {
-            return;
-        }
-        event.stopPropagation();
-        
-        let cardOriginal = event.currentTarget;
-        let container = document.getElementById('container-expandido');
-        let clone = cardOriginal.cloneNode(true);
-
-        let carousel = clone.querySelector('.carrosel');
-        let imgs = [];
-        $(cardOriginal).find('.carrosel img:not(.slick-cloned)').each((i, el) => imgs.push(el.src));
-
-        carousel.innerHTML = '';
-        carousel.className = 'carrosel';
-        imgs.forEach(src => {
-            let img = document.createElement('img');
-            img.src = src;
-            carousel.appendChild(img);
-        });
-
-        clone.classList.add("ativo-produto-apertado");
-        clone.classList.remove("mx-2", "mb-3");
-        
-        container.innerHTML = '';
-        container.appendChild(clone);
-
-        fecharCardEscolhido.classList.add("btn-ativo-card");
-        overlay.classList.add("ativo");
-        
-        $(clone).find('.carrosel').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: false
-        });
-    })
-});
-
-fecharCardEscolhido.addEventListener("click", () => {
-        document.getElementById('container-expandido').innerHTML = '';
-        fecharCardEscolhido.classList.remove("btn-ativo-card");
-        overlay.classList.remove("ativo");
-});
-overlay.addEventListener("click", () => {
-    document.getElementById('container-expandido').innerHTML = '';
-    fecharCardEscolhido.classList.remove("btn-ativo-card");
-    overlay.classList.remove("ativo");
-});
+btnFecharCard.addEventListener('click', fecharCardAberto);
+overlay.addEventListener('click', fecharCardAberto);
 
 $(document).ready(function() {
     $(".carrosel").slick({
