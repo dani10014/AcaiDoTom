@@ -78,10 +78,8 @@ produtoQueCliquei.forEach(card => {
         let container = document.getElementById('container-expandido');
         let clone = cardOriginal.cloneNode(true);
 
-        // Limpar o carrossel do clone para remover artefatos do Slick original
         let carousel = clone.querySelector('.carrosel');
         let imgs = [];
-        // Pega apenas as imagens originais (não clonadas pelo slick)
         $(cardOriginal).find('.carrosel img:not(.slick-cloned)').each((i, el) => imgs.push(el.src));
 
         carousel.innerHTML = '';
@@ -93,7 +91,7 @@ produtoQueCliquei.forEach(card => {
         });
 
         clone.classList.add("ativo-produto-apertado");
-        clone.classList.remove("mx-2", "mb-3"); // Remove margens que podem atrapalhar a centralização
+        clone.classList.remove("mx-2", "mb-3");
         
         container.innerHTML = '';
         container.appendChild(clone);
@@ -101,7 +99,6 @@ produtoQueCliquei.forEach(card => {
         fecharCardEscolhido.classList.add("btn-ativo-card");
         overlay.classList.add("ativo");
         
-        // Inicializa o slick no clone
         $(clone).find('.carrosel').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
