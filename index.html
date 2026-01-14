@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="rgb(75, 0, 119)">
+    <title>Açai do rio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+    <header>
+        <div class="container-cabecalho">
+            <img src="./logo.png">
+            <h1 class="display-3 mb-0">Açai Tropical</h1>
+            <a href="carrinho.html" id="carrinho"><img src="./carrinho(1).png"></a>
+        </div>
+        <div class="texto-abaixo-cabecalho">
+            <p class="mb-2 p-0">O seu paraiso roxo!</p>
+        </div>
+        <div class="horario-e-aberto d-flex ms-5 me-5 pt-2 justify-content-between">
+            <span id="horario">00</span>
+            <span id="aberto" class="ps-2 pe-2">Estamos abertos!</span>
+        </div>
+    </header>
+    <main>
+        <div class="container-conteudo-principal">
+            <div class="bloco-nome">
+                <img src="./Açai(1).png">
+                <p>Açai tradicional</p>
+            </div>
+            <div class="bloco-nome">
+                <img src="./Açai-de-kiwi.png">
+                <p>Açai De kiwi</p>
+            </div>
+            <div class="bloco-nome">
+                <img src="./Açai(1).png">
+                <p>Açai tradicional</p>
+            </div>
+        </div>
+        <h2 class="display-6 mb-4 ms-3">Populares</h2>
+
+        <div class="container">
+            <div class="cards-açai mx-1" id="cards-açai">
+                <div class="card mb-3 produto mx-2 ">
+                        <div class="card-body">
+                            <div class="carrosel">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>Tradicional</h5>
+                                    <p class="alert alert-info text-center small">250 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">15000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>tradicional</h5>
+                                    <p class="alert alert-info text-center small">350 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">20000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>completo</h5>
+                                    <p class="alert alert-info text-center small">350 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">25000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai <br>Tradicional</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">30000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai <br>Completo</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">35000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai <br>tradicional</h5>
+                                    <p class="alert alert-info text-center small">750ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">35000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai <br>completo</h5>
+                                    <p class="alert alert-info text-center small">750ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">
+                                        40000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai <br>1 litro</h5>
+                                    <p class="alert alert-info text-center small">1 Litro</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">
+                                        50000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai <br>na taça</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">30000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Sorvete <br>gourmet</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">15000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Barca de<br>açai</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">40000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Especial <br>nutella</h5>
+                                    <p class="alert alert-info text-center small">350 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">25000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Especial <br>nutella</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">35000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Especial <br>nutella</h5>
+                                    <p class="alert alert-info text-center small">750 Ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>Morango</li>
+                                        <li>Uva</li>
+                                        <li>Amendoim</li>
+                                        <li>Granola</li>
+                                        <li>Leite em pó</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">45000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>tentação</h5>
+                                    <p class="alert alert-info text-center small">350 Ml</p>
+                                    <ul>
+                                        <li>Muito morango</li>
+                                        <li>leite condensado</li>
+                                        <li>leite ninho e nutella</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">30000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>tentação</h5>
+                                    <p class="alert alert-info text-center small">500 Ml</p>
+                                    <ul>
+                                        <li>Muito morango</li>
+                                        <li>leite condensado</li>
+                                        <li>leite ninho e nutella</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">40000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>tentação</h5>
+                                    <p class="alert alert-info text-center small">750 Ml</p>
+                                    <ul>
+                                        <li>Muito morango</li>
+                                        <li>leite condensado</li>
+                                        <li>leite ninho e nutella</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">50000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card mb-3 produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai-de-kiwi.png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai<br>tentação</h5>
+                                    <p class="alert alert-info text-center small">1 litro</p>
+                                    <ul>
+                                        <li>Muito morango</li>
+                                        <li>leite condensado</li>
+                                        <li>leite ninho e nutella</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">65000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                </div>
+            </div> 
+            <div class="container">
+                <h2 class="display-6 mb-4">Salgados</h2>
+                <div class="cards-açai mx-1">
+                        <div class="card produto mx-2 mb-3">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai Tropical</h5>
+                                    <p class="alert alert-info text-center small">150ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>morango</li>
+                                        <li>kiwi</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">12,00 R$</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                        <div class="card produto mx-2">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai(1).png">
+                                    <img src="./Açai-de-kiwi.png">
+                                </div>
+                                    <h5 class="card-title text-center">Açai Tropical</h5>
+                                    <p class="alert alert-info text-center small">200ml</p>
+                                    <ul>
+                                        <li>Banana</li>
+                                        <li>morango</li>
+                                        <li>kiwi</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary" id="valor">15,00 R$</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar acompanhamentos</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <h2 class="ms-3 mb-3 mt-3">
+                Sobre nós
+            </h2>
+            <div class="container secao-sobre-nos h-100">
+            <div class="row justify-content-center">
+                <div id="meuCarrossel" class="carousel slide p-0" data-bs-ride="carousel">
+
+                <div class="carousel-indicators">
+                <button type="button" data-bs-target="#meuCarrossel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#meuCarrossel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#meuCarrossel" data-bs-slide-to="2"></button>
+                
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                            <div class="row justify-content-center">
+                                <div class="col-12 w-75">
+                                    <div class="card mb-5 mt-5 card-sobre h-90 d-block">
+                                        <img src="/loja-fisica.png" style="border-radius: 10px;">
+                                        <div class="card-body">
+                                            <div>
+                                                <h6 class="card-title display-6 text-center border-bottom pb-2">
+                                                    Os melhores açai da regiao!
+                                                </h6>
+                                                <p class="text-center mb-0">Aqui você encontra o melhor açai da região de mato grosso do sul</p>
+                                                <div class="accordion mb-3 mt-3">
+                                                    <div class="accordion-item">
+                                                        <div class="accordion-header">
+                                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#resposta1">
+                                                                Localização da loja
+                                                            </button>
+                                                        </div>
+                                                        <div id="resposta1" class="accordion-collapse collapse">
+                                                            <div class="accordion-body">
+                                                                Estamos localizados na rua das acaias, 123 - centro, cidade de exemplo - MS
+                                                                <a href="#">Verificar no mapa</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary w-100 mt-3">Saiba mais</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="carousel-item">
+                        <div class="col-12">
+                            <div class="row justify-content-center align-items-center h-100">
+                                <div class="col-12 w-75">
+                                    <div class="card mb-5 mt-5 card-sobre h-90 d-block">
+                                        <img src="./Açai-fresco.png" style="border-radius: 10px;">
+                                        <div class="card-body">
+                                            <div>
+                                                <h6 class="card-title display-6 text-center border-bottom pb-2">
+                                                    Ingredientes frescos e de qualidade!
+                                                </h6>
+                                                <p class="text-center">Frutas colhidas diretamente da fabrica especializada</p>
+                                                <div class="accordion mb-3 mt-3">
+                                                    <div class="accordion-item">
+                                                        <div class="accordion-header">
+                                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#resposta2">
+                                                                Qualidade de produtos
+                                                            </button>
+                                                        </div>
+                                                        <div id="resposta2" class="accordion-collapse collapse">
+                                                            <div class="accordion-body">
+                                                                <p>Todos as frutas e produtos revisados antes da entrega a nós</p>
+                                                                <a href="#">Verificar termos e leis</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary w-100 mt-3">Confira</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-12">
+                            <div class="row justify-content-center">
+                                <div class="col-12 w-75">
+                                    <div class="card mb-5 mt-5 card-sobre">
+                                        <img src="./logo.png" style="border-radius: 10px;">
+                                        <div class="card-body">
+                                            <h6 class="card-title display-6 text-center border-bottom pb-2">
+                                                Peça já o seu Açai Tropical!
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="alerta">
+            <h5 class="display-6">produto adiiocionar acompanhamentos</h5>
+        </div>
+        <div id="container-expandido"></div>
+        <div class="overlay"></div>
+        <div class="fechar-card">
+            <button class="btn-close btn-fechar-card"></button>
+        </div>
+        <div class="container"> 
+            <div class="modal fade" id="meuModal" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="border: 2px solid rgb(75, 0, 119);">
+                        <div class="modal-header">
+                            <img src="./logo.png" class="w-100" height="160px" style="object-fit: contain;">
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="display-6 text-center alert alert-danger" >Infelizmente ainda estamos fechados. Abriremos em breve, ao meio-dia.</h5>
+                        </div>
+                        <div class="modal-footer text-center" style="background-color: rgb(75, 0, 119); color: #fff;">
+                            <h6 class="display-6">Agradecemos a compreensão</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+</html>
