@@ -142,6 +142,7 @@ $(document).ready(function() {
     $(".carrosel").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
+        arrows:false,
     });
     $(".cards-açai").slick({
         slidesToShow: 2,

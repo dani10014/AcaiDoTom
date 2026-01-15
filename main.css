@@ -85,7 +85,7 @@ main .card{
 }
 main .card img{
     width: 100%;
-    padding-left: 10px;
+    border-radius: 10px;
 }
 .produto .carrosel img {
     height: 200px;
@@ -115,7 +115,7 @@ main .alerta{
     visibility: visible;
 }
 .slick-prev:before, .slick-next:before {
-    color:  rgb(75, 0, 119) !important; 
+    color:  rgba(75, 0, 119, 0.623) !important; 
     font-size: 30px !important; /* Opcional: aumenta o tamanho da seta */
     opacity: 1; /* Garante que ela não fique transparente */
 }
@@ -169,9 +169,9 @@ main .alerta{
 .fechar-card{
     display: none;
     position: fixed;
-    top: 5vh;
+    top: 2vh;
     right: 7vw;
-    z-index: 21;
+    z-index: 40;
 }
 .btn-fechar-card {
     filter: invert(1); 
