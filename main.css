@@ -80,8 +80,9 @@ main .container-conteudo-principal img{
     width: 100%;
 }
 main .card{
-    box-shadow: 0px 5px 10px black;
-    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15); /* Sombra mais suave e moderna */
+    border: none; /* Remove bordas padrão */
+    border-radius: 15px; /* Bordas mais arredondadas */
 }
 main .card img{
     width: 100%;
@@ -188,7 +189,8 @@ main .alerta{
 .cards-açai .slick-dots li button:before {
     font-size: 7px;       /* Tamanho da bolinha */
     color: rgb(75, 0, 119); /* Cor roxa do tema */
-    opacity: 0.4;          /* Transparência dos inativos */
+    opacity: 0.4;   
+    margin-top: 20px;       /* Transparência dos inativos */
 }
 .cards-açai .slick-dots li.slick-active button:before {
     color: rgb(75, 0, 119);
@@ -232,7 +234,54 @@ main .alerta{
 }
 
 .cards-açai ul {
-    margin-bottom: 5px;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Transforma a lista vertical em horizontal com pontinhos */
+.cards-açai ul li {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #666;
+}
+.cards-açai ul li::after {
+    content: " • ";
+    color: #ccc;
+    margin: 0 3px;
+}
+.cards-açai ul li:last-child::after {
+    content: "";
+}
+
+/* Estilo do Preço (Remove o fundo cinza e destaca) */
+.cards-açai #valor {
+    background-color: transparent !important;
+    border: none !important;
+    color: rgb(75, 0, 119);
+    font-size: 1.8rem;
+    font-weight: 800;
+    padding: 5px 0;
+}
+
+/* Estilo da etiqueta de ML */
+.cards-açai .alert-info {
+    background-color: rgba(75, 0, 119, 0.1); /* Fundo roxo bem clarinho */
+    color: rgb(75, 0, 119);
+    border: none;
+    border-radius: 50px; /* Formato de pílula */
+    padding: 5px 15px;
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.cards-açai .adicionar-carrinho {
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(75, 0, 119, 0.2);
 }
 .card-acompanhamentos{
     display: none;

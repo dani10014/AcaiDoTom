@@ -4,6 +4,7 @@ let botaoConfirmarPagamento = document.querySelector(".confirmar-pagamento");
 let cardPagamento = document.querySelector(".card-de-pagamento");
 let fecharMenuPagamento = document.querySelector(".btn-fechar-pagamento");
 let totalDaCompra = document.querySelector(".total-a-pagar");
+let btnFinalizarPedido = document.getElementById("finalizarpedido")
 
 
 if(dadosProdutos.length === 0){
@@ -139,4 +140,34 @@ botaoAdicionarMais.forEach(button => {
         valorElement.innerText = `${(valorUnitario * quantidadeAtual).toFixed(2)} Gs`;
 
     })
+});
+
+btnFinalizarPedido.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    let nome = document.getElementById("nome").value;
+    let endereco = document.getElementById("endereco").value;
+
+    if (nome.trim() === "") {
+        alert("Por favor, preencha seu Nome Completo antes de finalizar.");
+        return;
+    }
+
+    let mensagem = `Olá, me chamo *${nome}* e gostaria de fazer um pedido:\n\n`;
+
+    dadosProdutos.forEach((produto, index) => {
+        mensagem += `*Item ${index + 1}:* ${produto.nome} (${produto.ml})\n`;
+        if (produto.acompanhamentos && produto.acompanhamentos.length > 0) mensagem += `  + Acomp: ${produto.acompanhamentos.join(", ")}\n`;
+        if (produto.adicionais && produto.adicionais.length > 0) mensagem += `  + Extras: ${produto.adicionais.join(", ")}\n`;
+        mensagem += `  Valor: ${produto.preco}\n\n`;
+    });
+
+    mensagem += `*Total a Pagar:* Gs ${total.toFixed(2)}\n`;
+    if (endereco) mensagem += `*Endereço:* ${endereco}\n`;
+    mensagem += `*Pagamento:* Pix`;
+
+    let numeroWhatsApp = "5567991070222"; 
+    let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    
+    window.open(url, "_blank");
 });
