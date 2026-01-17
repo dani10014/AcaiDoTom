@@ -19,44 +19,68 @@ if(dadosProdutos.length === 0){
 }
 dadosProdutos.forEach((dadosProduto, index) => {
     let listaAcompanhamentos = "";
-    if (dadosProduto.acompanhamentos && Array.isArray(dadosProduto.acompanhamentos)) {
+    if (dadosProduto.acompanhamentos && Array.isArray(dadosProduto.acompanhamentos) && dadosProduto.acompanhamentos.length > 0) {
         listaAcompanhamentos = dadosProduto.acompanhamentos.map(item => `<li>${item}</li>`).join("");
+    } else {
+        listaAcompanhamentos = "<li class='text-muted small' style='list-style:none'><em>Somente açaí (sem acompanhamentos)</em></li>";
     }
-
     let listaAdicionais = "";
-    if (dadosProduto.adicionais && Array.isArray(dadosProduto.adicionais)) {
+    if (dadosProduto.adicionais && Array.isArray(dadosProduto.adicionais) && dadosProduto.adicionais.length > 0) {
         listaAdicionais = dadosProduto.adicionais.map(item => `<li>${item}</li>`).join("");
     }
 
-    let html =` <div class="col-12 col-md-8">
-                        <div class="card mb-4">
-                        <div class="card-body">
-                        <div class="row align-items-center">
-                                    <div class="col-4">
-                                    <img src="${dadosProduto.imagem}" class="img-fluid text-center mb-5" style="height: 140px; object-fit: contain; border-radius:10px">
-                                    </div>
-                                    <div class="col-8">
-                                    <h5 class="card-title text-center">${dadosProduto.nome}</h5>
-                                    <p class="card-text alert alert-info text-center">${dadosProduto.ml}</p>
-                                    <ul>
-                                        ${listaAcompanhamentos}
-                                    </ul>
-                                    <h5 class="display-5 text-center border-bottom pb-2">Adicionais</h5>
-                                    <ul>
-                                        ${listaAdicionais}
-                                    </ul>
-                                    <h5 class="text-center mb-3 valor" data-preco="${dadosProduto.preco}">${dadosProduto.preco}</h5>
-                                    <div class="valor-e-quantidade d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-dark menos">Menos</button>
-                                        <span class="btn btn-info quantidade">1</span>
-                                        <button class="btn btn-dark mais">Mais</button>
-                                    </div>
-                                </div>
+    let html = `
+    <div class="col-12 col-md-8 mb-3">
+        <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body p-3">
+                <div class="row g-3 align-items-center">
+                    <!-- Imagem -->
+                    <div class="col-4 col-sm-3 text-center">
+                        <img src="${dadosProduto.imagem}" class="img-fluid rounded" style="max-height: 100px; object-fit: contain;">
+                    </div>
+                    
+                    <!-- Detalhes -->
+                    <div class="col-8 col-sm-9">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h5 class="card-title mb-0 fw-bold">${dadosProduto.nome}</h5>
+                                <small class="text-muted badge bg-light text-dark border mt-1">${dadosProduto.ml}</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger excluir border-0" data-index="${index}" title="Remover item">✕</button>
+                        </div>
+
+                        <!-- Acompanhamentos -->
+                        <div class="mb-2">
+                            <small class="fw-bold text-secondary">Acompanhamentos:</small>
+                            <ul class="list-unstyled small mb-0 ps-2 border-start border-3 border-light text-muted">
+                                ${listaAcompanhamentos}
+                            </ul>
+                        </div>
+
+                        <!-- Adicionais (se houver) -->
+                        ${listaAdicionais ? `
+                        <div class="mb-2">
+                            <small class="fw-bold text-secondary">Adicionais:</small>
+                            <ul class="list-unstyled small mb-0 ps-2 border-start border-3 border-warning text-muted">
+                                ${listaAdicionais}
+                            </ul>
+                        </div>` : ''}
+
+                        <!-- Preço e Quantidade -->
+                        <div class="d-flex justify-content-between align-items-end mt-3 pt-2 border-top">
+                            <h5 class="mb-0 text-primary fw-bold valor" data-preco="${dadosProduto.preco}">${dadosProduto.preco}</h5>
+                            
+                            <div class="d-flex align-items-center bg-light rounded-pill border px-2 py-1">
+                                <button class="btn btn-sm btn-link text-decoration-none text-dark p-0 menos" style="width: 20px;">-</button>
+                                <span class="mx-2 fw-bold small quantidade">1</span>
+                                <button class="btn btn-sm btn-link text-decoration-none text-dark p-0 mais" style="width: 20px;">+</button>
                             </div>
                         </div>
-                        <button class="btn btn-danger w-100 excluir" data-index="${index}">Excluir</button>
-                    </div>`
-                    ;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`;
                 container.innerHTML += html;
 });
 
