@@ -229,6 +229,14 @@ main .alerta{
     justify-content: flex-start; 
 }
 
+/* Garante alinhamento perfeito dos títulos */
+.cards-açai .card-title {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .cards-açai .adicionar-carrinho {
     margin-top: 20px; 
 }
@@ -241,7 +249,6 @@ main .alerta{
     line-height: 1.4;
 }
 
-/* Transforma a lista vertical em horizontal com pontinhos */
 .cards-açai ul li {
     display: inline-block;
     font-size: 0.85rem;
