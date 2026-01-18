@@ -9,6 +9,7 @@ body{
 header{
     background-color: rgb(75, 0, 119);
     padding-bottom: 60px;
+    border-radius: 2px;
 }
 header .container-cabecalho{
     display: flex;
@@ -21,7 +22,7 @@ header .container-cabecalho{
 header .container-cabecalho #carrinho{
     background-color: transparent;
     border: none;
-    padding-top: 12 ppx;
+    padding-top: 8px;
 }
 header .container-cabecalho #carrinho img{
     object-fit: scale-down;

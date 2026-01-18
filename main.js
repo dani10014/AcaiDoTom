@@ -58,29 +58,30 @@ document.addEventListener("click", function (event) {
                     <div class="card-body">
                         <h5 class="card-title text-center">${nomeProduto}</h5>
                         <p class="alert alert-info text-center small">${mlDoProduto}</p>
+                        <h5 class="alert alert-danger text-center">Por favor selecione a quantidade de pasteis após adicionar ao seu carrinho</h5>
                         <h5 class="text-center border-bottom pb-2">Escolha o recheio</h5>
                         <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento1">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="acompanhamento1">
                                     <label class="form-check-label" for="acompanhamento1">Carne</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento2">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="acompanhamento2">
                                     <label class="form-check-label" for="acompanhamento2">Queijo</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento3">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="acompanhamento3">
                                     <label class="form-check-label" for="acompanhamento3">Presunto</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento4">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="acompanhamento4">
                                     <label class="form-check-label" for="acompanhamento4">Frango</label>
                                 </div>
                             </div>
@@ -111,153 +112,6 @@ document.addEventListener("click", function (event) {
                         alertaAdicao.classList.remove("alerta-ativo");
                     }, 1000);
                     return;
-                
-            }else if(nomeProdutoCheck.includes("nutela")){
-                    modalHTML =`<div class="card text-white" style="background-color: rgb(75, 0, 119);">
-                    <img src="${imgSrc}" class="card-img-top" style="height: 120px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">${nomeProduto}</h5>
-                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
-                        <div class="alert alert-warning text-center">Muito Morango, leite condensado, leite ninho e nutella!</div>
-                        <div class="row text-start p-2" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento1">
-                                    <label class="form-check-label" for="acompanhamento1">Banana</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento2">
-                                    <label class="form-check-label" for="acompanhamento2">Morango</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento3">
-                                    <label class="form-check-label" for="acompanhamento3">Uva</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento4">
-                                    <label class="form-check-label" for="acompanhamento4">Amendoim</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento5">
-                                    <label class="form-check-label" for="acompanhamento5">Granola</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento6">
-                                    <label class="form-check-label" for="acompanhamento6">Leite em pó</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento7">
-                                    <label class="form-check-label" for="acompanhamento7">Leite Cond.</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento8">
-                                    <label class="form-check-label" for="acompanhamento8">Gotas Choc.</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento9">
-                                    <label class="form-check-label" for="acompanhamento9">Bis</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento10">
-                                    <label class="form-check-label" for="acompanhamento10">Sucrilhos</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento11">
-                                    <label class="form-check-label" for="acompanhamento11">M&Ms</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento12">
-                                    <label class="form-check-label" for="acompanhamento12">Mel</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento13">
-                                    <label class="form-check-label" for="acompanhamento13">Calda Choc.</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento14">
-                                    <label class="form-check-label" for="acompanhamento14">Calda Morango</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acompanhamento15">
-                                    <label class="form-check-label" for="acompanhamento15">Chantilly</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h5 class="mt-3 mb-2">Adicionais Extras</h5>
-                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input input-adicionais" type="checkbox" id="adicional1">
-                                        <label class="form-check-label" for="adicional1">Talento</label>
-                                    </div>
-                                    <span class="alert alert-info mb-0 p-1">5.000 Gs</span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input input-adicionais" type="checkbox" id="adicional2">
-                                        <label class="form-check-label" for="adicional2">Nutella</label>
-                                    </div>
-                                    <span class="alert alert-info mb-0 p-1">5.000 Gs</span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input input-adicionais" type="checkbox" id="adicional3">
-                                        <label class="form-check-label" for="adicional3">KitKat</label>
-                                    </div>
-                                    <span class="alert alert-info mb-0 p-1">5.000 Gs</span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input input-adicionais" type="checkbox" id="adicional4">
-                                        <label class="form-check-label" for="adicional4">Prestígio</label>
-                                    </div>
-                                    <span class="alert alert-info mb-0 p-1">5.000 Gs</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
-                            <span class="fw-bold">Total:</span>
-                            <span class="fw-bold" id="preco-total">${valorProduto}</span>
-                        </div>
-                        <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
-                    </div>
-                </div>;`
             }else if(nomeProdutoCheck.includes("completo")){
                 modalHTML = `
                 <div class="card text-white" style="background-color: rgb(75, 0, 119);">

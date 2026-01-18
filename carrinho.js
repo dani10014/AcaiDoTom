@@ -35,12 +35,12 @@ dadosProdutos.forEach((dadosProduto, index) => {
             <div class="card-body p-3">
                 <div class="row g-3 align-items-center">
                     <!-- Imagem -->
-                    <div class="col-4 col-sm-3 text-center">
-                        <img src="${dadosProduto.imagem}" class="img-fluid rounded" style="max-height: 100px; object-fit: contain;">
+                    <div class="col-4 text-center">
+                        <img src="${dadosProduto.imagem}" class="img-fluid rounded" style="max-height: 140px; object-fit: contain;">
                     </div>
                     
                     <!-- Detalhes -->
-                    <div class="col-8 col-sm-9">
+                    <div class="col-8">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <h5 class="card-title mb-0 fw-bold">${dadosProduto.nome}</h5>
