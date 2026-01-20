@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="rgb(75, 0, 119)">
+    <title>Carrinho açai-tropical</title>
+    <link rel="stylesheet" href="carrinho.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <div class="container-cabecalho d-flex justify-content-between align-items-center p-3">
+            <a href="index.html" class="btn btn-light"style="padding: 10px; border-radius: 10px;">Voltar</a>
+            <h1 class="display-6">Carrinho</h1>
+        </div>
+    </header>
+    <main style="margin-top: 30px;">
+        <div class="container">
+            <div class="row justify-content-center" id="lista-produtos">
+                
+            </div>
+        </div>
+        <div class="menu">
+            <div class="container-valor">
+                <h5 class="display-3 text-center" id="valor-total">
+                    Gs 0
+                </h5>
+                <button class="btn btn-primary confirmar-pagamento">Confirmar pagamento</button>
+            </div>
+        </div>
+        <div class="menu-pagamento">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-de-pagamento">
+                            <div class="card-body">
+                                <div class="container d-flex justify-content-between align-items-center p-0 mb-5 menu-forma-de-pagamento-e-fechar">
+                                    <h5 class="card-title text-center display-6 mb-0">Forma de pagamento</h5>
+                                    <button class="btn-close btn-fechar-pagamento p-0"></button>
+                                </div>
+                                <div class="container">
+                                    <label class="form-label fw-bold text-muted text-center w-100 mb-3">Como deseja pagar?</label>
+                                    <div class="row g-3 justify-content-center mb-4">
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-outline-secondary w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center shadow-sm" id="btn-pag-entrega" style="border-radius: 12px; transition: 0.3s;">
+                                                <span style="font-size: 1.5rem;">💵</span>
+                                                <span class="fw-bold mt-1">Dinheiro</span>
+                                                <span style="font-size: 0.75rem;">(Na entrega)</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-primary w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center shadow-sm" id="btn-pag-pix" style="border-radius: 12px; transition: 0.3s;">
+                                                <span style="font-size: 1.5rem;">💠</span>
+                                                <span class="fw-bold mt-1">Pix</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-outline-secondary w-100 h-100 py-3 d-flex flex-column align-items-center justify-content-center shadow-sm" id="btn-pag-cartao" style="border-radius: 12px; transition: 0.3s;">
+                                                <span style="font-size: 1.5rem;">💳</span>
+                                                <span class="fw-bold mt-1">Cartão</span>
+                                                <span style="font-size: 0.75rem;">(Na entrega)</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <h6 class="text-center mt-2" style="color: red;">
+                                        * Por favor preencha os dados de nome exatamente para finalizar o pedido.
+                                    </h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form>
+                                                <h2 class="total-a-pagar alert alert-success text-center">
+                                                    
+                                                </h2>
+                                                <div class="mb-3">
+                                                    <label for="nome" class="form-label">Nome Completo (Obrigatorio)</label>
+                                                    <input type="text" class="form-control" id="nome" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="endereco" class="form-label">Endereço de Entrega</label>
+                                                    <input type="text" class="form-control" id="endereco" placeholder="Rua, Bairro e Número ou Localização" required>
+                                                </div>
+                                                <div class="mb-3 d-none" id="div-troco">
+                                                    <label for="troco" class="form-label fw-bold text-primary">Precisa de troco para quanto?</label>
+                                                    <input type="text" class="form-control" id="troco" placeholder="Ex: 100.000 Gs">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-outline-success w-100 fw-bold" id="btn-localizacao">📍 Usar minha localização atual</button>
+                                                </div>
+                                                <div id="mapa-preview" class="mb-3"></div>
+                                                <a href="" target="_blank" class="btn btn-success w-100" id="finalizarpedido">Finalizar pedido</a>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alerta">
+            <h5 class="display-6">Quantidade minima excedida</h5>
+        </div>
+    </main>
+    <script src="carrinho.js"></script>
+    
+</body>
+</html>

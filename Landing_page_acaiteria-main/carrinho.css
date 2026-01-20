@@ -1,0 +1,81 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+header{
+    background-color: rgb(75, 0, 119);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+header .container-cabecalho{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    margin: 0 20px;
+    height: 90px;
+}
+body {
+    padding-bottom: 300px;
+}
+main .menu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+main .menu .container-valor{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    margin: 25px;
+}
+main .menu .container-valor button{
+    margin: 15px;
+}
+main .card-de-pagamento{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    left: 0;
+    top: 40px;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: all 0.5s ease-in-out;
+}
+main .ativo-card-de-pagamento{
+    transform: translateY(0);
+}
+main .qr-code{
+    object-fit: scale-down;
+    height: 200px;
+}
+main .alerta{
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    position: fixed;
+    color: #fff;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 80vh;
+    justify-content: center;
+    background-color:  rgba(75, 0, 119, 0.781);
+}
+main .ativo{
+    opacity: 1;
+    visibility: visible;
+}
