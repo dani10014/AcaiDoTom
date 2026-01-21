@@ -63,32 +63,26 @@ document.addEventListener("click", function (event) {
                         <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento1">
-                                    <label class="form-check-label" for="acompanhamento1">300 Ml</label>
+                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento1" data-preco="5000" checked>
+                                    <label class="form-check-label" for="acompanhamento1">300 Ml (5.000 Gs)</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento2">
-                                    <label class="form-check-label" for="acompanhamento2">500 Ml</label>
+                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento2" data-preco="10000">
+                                    <label class="form-check-label" for="acompanhamento2">500 Ml (10.000 Gs)</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento3">
-                                    <label class="form-check-label" for="acompanhamento3">1 Litro</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2 invisible">
-                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento3">
-                                    <label class="form-check-label" for="acompanhamento3">1 Litro</label>
+                                    <input class="form-check-input" name="Ml-suco" type="radio" id="acompanhamento3" data-preco="15000">
+                                    <label class="form-check-label" for="acompanhamento3">1 Litro (15.000 Gs)</label>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
                             <span class="fw-bold">Total:</span>
-                            <span class="fw-bold" id="preco-total">${valorProduto}</span>
+                            <span class="fw-bold" id="preco-total">5000 Gs</span>
                         </div>
                         <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
                     </div>
@@ -131,6 +125,48 @@ document.addEventListener("click", function (event) {
                                 <div class="form-check form-switch mb-2">
                                     <input class="form-check-input" name="pastel-recheio" type="radio" id="acompanhamento4">
                                     <label class="form-check-label" for="acompanhamento4">Enroladinho de salsicha</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
+                            <span class="fw-bold">Total:</span>
+                            <span class="fw-bold" id="preco-total">${valorProduto}</span>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
+                    </div>
+                </div>`;
+                }else if(nomeProdutoCheck.includes("salgado-assado")){
+                modalHTML = `
+                <div class="card text-white" style="background-color: rgb(75, 0, 119);">
+                    <img src="${imgSrc}" class="card-img-top" style="height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${nomeProduto}</h5>
+                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
+                        <h5 class="alert alert-danger text-center">Selecione o recheio</h5>
+                        <h5 class="text-center border-bottom pb-2">Recheio</h5>
+                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="assado1">
+                                    <label class="form-check-label" for="assado1">Carne</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="assado2">
+                                    <label class="form-check-label" for="assado2">Queijo</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="assado3">
+                                    <label class="form-check-label" for="assado3">Presunto</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="pastel-recheio" type="radio" id="assado4">
+                                    <label class="form-check-label" for="assado4">Frango</label>
                                 </div>
                             </div>
                         </div>
@@ -185,6 +221,42 @@ document.addEventListener("click", function (event) {
                         <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
                             <span class="fw-bold">Total:</span>
                             <span class="fw-bold" id="preco-total">${valorProduto}</span>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
+                    </div>
+                </div>`;
+            }else if(nomeProdutoCheck.includes("frango-batata")){
+                modalHTML = `
+                <div class="card text-white" style="background-color: rgb(75, 0, 119);">
+                    <img src="${imgSrc}" class="card-img-top" style="height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${nomeProduto}</h5>
+                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
+                        <h5 class="alert alert-danger text-center">Selecione o tamanho da porção</h5>
+                        <h5 class="text-center border-bottom pb-2">Tamanho</h5>
+                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="tamanho-frango" type="radio" id="tamanhoP" data-preco="35000">
+                                    <label class="form-check-label" for="tamanhoP">Pequena (35.000 Gs)</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="tamanho-frango" type="radio" id="tamanhoM" data-preco="50000" checked>
+                                    <label class="form-check-label" for="tamanhoM">Média (50.000 Gs)</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="tamanho-frango" type="radio" id="tamanhoG" data-preco="75000">
+                                    <label class="form-check-label" for="tamanhoG">Grande (75.000 Gs)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
+                            <span class="fw-bold">Total:</span>
+                            <span class="fw-bold" id="preco-total">50000 Gs</span>
                         </div>
                         <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
                     </div>
@@ -473,6 +545,24 @@ document.addEventListener("click", function (event) {
                         }
                     });
                     displayTotal.innerText = total + " Gs";
+                });
+            });
+
+            const inputsTamanhoFrango = cardAcompanhamentos.querySelectorAll('input[name="tamanho-frango"]');
+            inputsTamanhoFrango.forEach(input => {
+                input.addEventListener('change', () => {
+                    if(input.checked){
+                        displayTotal.innerText = input.getAttribute('data-preco') + " Gs";
+                    }
+                });
+            });
+
+            const inputsMlSuco = cardAcompanhamentos.querySelectorAll('input[name="Ml-suco"]');
+            inputsMlSuco.forEach(input => {
+                input.addEventListener('change', () => {
+                    if(input.checked){
+                        displayTotal.innerText = input.getAttribute('data-preco') + " Gs";
+                    }
                 });
             });
 

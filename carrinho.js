@@ -75,13 +75,13 @@ if(btnPagEntrega && btnPagPix && btnPagCartao) {
     
 
 if(dadosProdutos.length === 0){
-    let mensagen = `<div class="row">
+    let mensagem = `<div class="row">
                         <div class="col-12">
-                        <h1 class="text-center display-6">Carrinho esta vazio!</h1>
+                        <h1 class="text-center display-6">Carrinho está vazio!</h1>
                         </div>
                     </div>`
                     ;
-                container.innerHTML += mensagen;
+                container.innerHTML += mensagem;
     botaoConfirmarPagamento.style.display = "none";
 }
 dadosProdutos.forEach((dadosProduto, index) => {
@@ -235,7 +235,7 @@ botaoAdicionarMais.forEach(button => {
         quantidadeAtual++;
         quantidade.innerText = quantidadeAtual;
         let valorElement = event.target.closest(".card").querySelector(".valor");
-        let precoTexto = valorElement.getAttribute("data-preco").replace("Gs", "").replace(",", "").trim();
+        let precoTexto = valorElement.getAttribute("data-preco").replace("Gs", "").replace(",", ".").trim();
         let valorUnitario = parseFloat(precoTexto);
         total += valorUnitario;
         atualizarTotais(total);
