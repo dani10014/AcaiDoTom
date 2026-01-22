@@ -252,6 +252,70 @@ document.addEventListener("click", function (event) {
                         </div>
                     </div>
                 </div>`;
+            }else if(nomeProdutoCheck.includes("pastel-especial")){
+                modalHTML = `
+                <div class="card text-white" style="background-color: rgb(75, 0, 119);">
+                    <img src="${imgSrc}" class="card-img-top" style="height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${nomeProduto}</h5>
+                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
+                        <h5 class="alert alert-danger text-center">Selecione o recheio</h5>
+                        
+                        <h5 class="text-center border-bottom pb-2">Tradicionais (10.000 Gs)</h5>
+                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio1" data-preco="10000" checked>
+                                    <label class="form-check-label" for="recheio1">Carne</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio2" data-preco="10000">
+                                    <label class="form-check-label" for="recheio2">Queijo</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio3" data-preco="10000">
+                                    <label class="form-check-label" for="recheio3">Frango</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio4" data-preco="10000">
+                                    <label class="form-check-label" for="recheio4">Calabresa acebolada</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="text-center border-bottom pb-2 mt-3">Especiais (15.000 Gs)</h5>
+                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-12"><div class="form-check form-switch mb-2"><input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio5" data-preco="15000"><label class="form-check-label" for="recheio5">Carne c/ Queijo</label></div></div>
+                            <div class="col-12"><div class="form-check form-switch mb-2"><input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio6" data-preco="15000"><label class="form-check-label" for="recheio6">Queijo e Presunto</label></div></div>
+                            <div class="col-12"><div class="form-check form-switch mb-2"><input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio7" data-preco="15000"><label class="form-check-label" for="recheio7">Frango c/ Queijo</label></div></div>
+                            <div class="col-12"><div class="form-check form-switch mb-2"><input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio8" data-preco="15000"><label class="form-check-label" for="recheio8">Calabresa c/ Queijo</label></div></div>
+                        </div>
+
+                        <h5 class="text-center border-bottom pb-2 mt-3">Super Recheado (20.000 Gs)</h5>
+                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" name="recheio-pastel-especial" type="radio" id="recheio9" data-preco="20000">
+                                    <label class="form-check-label" for="recheio9">Tudo (Qj, Fr, Crn, Bcn, Cal)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sticky-footer">
+                            <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
+                                <span class="fw-bold">Total:</span>
+                                <span class="fw-bold" id="preco-total">10000 Gs</span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
+                        </div>
+                    </div>
+                </div>`;
             }else if(nomeProdutoCheck.includes("frango-batata")){
                 modalHTML = `
                 <div class="card text-white" style="background-color: rgb(75, 0, 119);">
@@ -593,6 +657,15 @@ document.addEventListener("click", function (event) {
 
             const inputsMlSuco = cardAcompanhamentos.querySelectorAll('input[name="Ml-suco"]');
             inputsMlSuco.forEach(input => {
+                input.addEventListener('change', () => {
+                    if(input.checked){
+                        displayTotal.innerText = input.getAttribute('data-preco') + " Gs";
+                    }
+                });
+            });
+
+            const inputsPastelEspecial = cardAcompanhamentos.querySelectorAll('input[name="recheio-pastel-especial"]');
+            inputsPastelEspecial.forEach(input => {
                 input.addEventListener('change', () => {
                     if(input.checked){
                         displayTotal.innerText = input.getAttribute('data-preco') + " Gs";
