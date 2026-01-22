@@ -342,9 +342,9 @@ main .alerta{
 }
 .contador-de-produtos{
     position: absolute;
-    top:25px;
-    font-size: 22px;
-    color: rgba(255, 64, 64, 0.897);
+    top:27px;
+    font-size: 18px;
+    color: rgba(255, 0, 0, 0.897);
     right: 45px;
     z-index: 40;
 }
