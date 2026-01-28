@@ -208,13 +208,12 @@ main .alerta{
 }
 
 .cards-açai {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 .cards-açai .slick-dots li button:before {
     font-size: 7px;
     color: rgb(75, 0, 119);
     opacity: 0.4;   
-    margin-top: 20px;
 }
 .cards-açai .slick-dots li.slick-active button:before {
     color: rgb(75, 0, 119);
@@ -263,7 +262,7 @@ main .alerta{
 }
 
 .cards-açai .card-title {
-    min-height: 60px;
+    min-height: 85px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,25 +272,30 @@ main .alerta{
     margin-top: 10px; 
 }
 
-.cards-açai ul {
+.cards-açai .card-body ul {
     list-style: none;
     padding: 0;
     text-align: center;
     margin-bottom: 15px;
     line-height: 1.4;
+    min-height: 110px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
-.cards-açai ul li {
+.cards-açai .card-body ul li {
     display: inline-block;
     font-size: 0.85rem;
     color: #666;
 }
-.cards-açai ul li::after {
+.cards-açai .card-body ul li::after {
     content: " • ";
     color: #ccc;
     margin: 0 3px;
 }
-.cards-açai ul li:last-child::after {
+.cards-açai .card-body ul li:last-child::after {
     content: "";
 }
 
@@ -303,6 +307,10 @@ main .alerta{
     font-weight: 800;
     padding: 5px 0;
     margin-top: auto;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cards-açai .alert-info {
@@ -311,9 +319,13 @@ main .alerta{
     border: none;
     border-radius: 50px;
     padding: 5px 15px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    width: fit-content;
+    margin: 0 auto 10px auto;
     font-weight: 600;
-    margin-bottom: 10px;
 }
 .cards-açai .adicionar-carrinho {
     border-radius: 50px;

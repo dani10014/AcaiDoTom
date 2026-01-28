@@ -108,62 +108,6 @@ document.addEventListener("click", function (event) {
                         </div>
                     </div>
                 </div>`;
-                }else if(nomeProdutoCheck.includes("salgadinhos")){
-                modalHTML = `
-                <div class="card text-white" style="background-color: rgb(75, 0, 119);">
-                    <img src="${imgSrc}" class="card-img-top" style="height: 120px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">${nomeProduto}</h5>
-                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
-                        <h5 class="alert alert-danger text-center">Escolha os sabores de sua preferência</h5>
-                        <h5 class="text-center border-bottom pb-2">Sabores</h5>
-                        <div class="row text-start p-2 justify-content-center" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="pastel-recheio" type="checkbox" id="salg1">
-                                    <label class="form-check-label" for="salg1">Coxinha de frango</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="pastel-recheio" type="checkbox" id="salg2">
-                                    <label class="form-check-label" for="salg2">Croquete de calabresa</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="pastel-recheio" type="checkbox" id="salg3">
-                                    <label class="form-check-label" for="salg3">Coxinha de carne</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="pastel-recheio" type="checkbox" id="salg4">
-                                    <label class="form-check-label" for="salg4">Bolinha de queijo</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="pastel-recheio" type="checkbox" id="salg5">
-                                    <label class="form-check-label" for="salg5">Kibe</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" name="pastel-recheio" type="checkbox" id="salg6">
-                                    <label class="form-check-label" for="salg6">Enroladinho de salsicha</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sticky-footer">
-                            <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
-                                <span class="fw-bold">Total:</span>
-                                <span class="fw-bold" id="preco-total">${valorProduto}</span>
-                            </div>
-                            <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
-                        </div>
-                    </div>
-                </div>`;
                 }else if(nomeProdutoCheck.includes("salgado-assado")){
                 modalHTML = `
                 <div class="card text-white" style="background-color: rgb(75, 0, 119);">
@@ -360,7 +304,7 @@ document.addEventListener("click", function (event) {
                         </div>
                     </div>
                 </div>`
-            }else if(nomeProdutoCheck.includes("sabor-unico")){
+            }else if(nomeProdutoCheck.includes("sabor-unico") || nomeProdutoCheck.includes("salgadinhos")){
                     let produtoSelecionado = secaoAdicionarAcompanhamento;
                     
                     let listaIngredientes = Array.from(produtoSelecionado.querySelectorAll("ul li"))
@@ -383,6 +327,59 @@ document.addEventListener("click", function (event) {
                         alertaAdicao.classList.remove("alerta-ativo");
                     }, 1000);
                     return;
+            }else if(nomeProdutoCheck.includes("geladinho-gourmet")){
+                modalHTML = `
+                <div class="card text-white" style="background-color: rgb(75, 0, 119);">
+                    <img src="${imgSrc}" class="card-img-top" style="height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">${nomeProduto}</h5>
+                        <p class="alert alert-info text-center small">${mlDoProduto}</p>
+                        <div class="alert alert-warning text-center">Por favor selecione o sabor</div>
+                        <div class="row text-start p-2" style="background-color: rgb(255, 255, 255); color:black; border-radius:10px;">
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="radio" name="sabor-geladinho" id="acompanhamento1">
+                                    <label class="form-check-label" for="acompanhamento1">Chocolate</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="radio" name="sabor-geladinho" id="acompanhamento2">
+                                    <label class="form-check-label" for="acompanhamento2">Morango e nutela</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="radio" name="sabor-geladinho" id="acompanhamento3">
+                                    <label class="form-check-label" for="acompanhamento3">Maracuja mouse</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="radio" name="sabor-geladinho" id="acompanhamento4">
+                                    <label class="form-check-label" for="acompanhamento4">Coco</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="radio" name="sabor-geladinho" id="acompanhamento5">
+                                    <label class="form-check-label" for="acompanhamento5">Leite cond.</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="radio" name="sabor-geladinho" id="acompanhamento6">
+                                    <label class="form-check-label" for="acompanhamento6">Amendoin</label>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="sticky-footer">
+                            <div class="d-flex justify-content-between align-items-center alert alert-info mt-3 mb-3">
+                                <span class="fw-bold">Total:</span>
+                                <span class="fw-bold" id="preco-total">${valorProduto}</span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3 btn-confirmar">Adicionar ao carrinho</button>
+                        </div>`
             }else if(nomeProdutoCheck.includes("completo")){
                 modalHTML = `
                 <div class="card text-white" style="background-color: rgb(75, 0, 119);">
