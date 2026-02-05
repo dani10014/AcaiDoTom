@@ -9,6 +9,10 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="main.css">
 
 </head>
@@ -55,7 +59,7 @@
                 <p>Bebidas</p>
             </div>
         </div>
-        <h2 class="display-6 mb-3 ms-3">Açai populares</h2>
+        <h2 class="display-6 mb-3 ms-3">Açai populares<i class="ms-2 bola-de-sorvete-icon" data-lucide="ice-cream-bowl"></i></h2>
         <div class="container p-1 mb-1">
             <div class="cards-açai mx-1" id="cards-açai">
                 <div class="card mb-3 produto mx-2 ">
@@ -466,16 +470,51 @@
                 </div>
             </div> 
             <div class="container">
-                <h2 class="display-6 mb-4" id="salgados">Pratos/Porções</h2>
+                <h2 class="display-6 mb-4" id="salgados">Pratos/Porções<i class="ms-2 icone-comida" data-lucide="cooking-pot"></i></h2>
                 <div class="cards-açai mx-1">
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
                                 <div class="carrosel">
+                                    <img src="./IMG-20260203-WA0006.jpg">
+                                </div>
+                                    <h5 class="card-title text-center" data-tipo="sabor-unico">Porção<br>prime completa</h5>
+                                    <p class="alert alert-info text-center small">Porção</p>
+                                    <ul class="mb-0">
+                                        <li>Frango frito</li>
+                                        <li>Carne</li>
+                                        <li>Calabresa</li>
+                                        <li>Batata frita</li>
+                                        <li class="d-none">Cebola recheada</li>
+                                        <li class="d-none">Polenta frita</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary valor">120000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar ao carrinho</button>
+                                </div>
+                        </div>
+                        <div class="card produto mx-2 mb-3">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <video src="./VID-20260203-WA0007.mp4" style="border-radius: 10px; width: 100%; height: 150px; object-fit: cover; pointer-events: none;" autoplay muted loop playsinline></video>
+                                </div>
+                                    <h5 class="card-title text-center" data-tipo="sabor-unico">Frango<br>Batata e bacon 2 pessoas</h5>
+                                    <p class="alert alert-info text-center small">Porção</p>
+                                    <ul class="mb-0">
+                                        <li>Frango frito</li>
+                                        <li>Batata frita</li>
+                                        <li>Bacon</li>
+                                        <li>Cheddar</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary valor">70000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar ao carrinho</button>
+                                </div>
+                        </div>
+                        <div class="card produto mx-2 mb-3">
+                            <div class="card-body">
+                                <div class="carrosel">
                                     <img src="./Screenshot_20260121-082627.jpg">
-                                    
                                 </div>
                                     <h5 class="card-title text-center" data-tipo="frango-batata">Frango com<br>batata frita</h5>
-                                    <p class="alert alert-info text-center small">Variedade</p>
+                                    <p class="alert alert-info text-center small">Porção</p>
                                     <ul class="mb-0">
                                         <li>Frango frito</li>
                                         <li>Batata frita</li>
@@ -492,7 +531,7 @@
                                     <img src="./IMG-20260119-WA0018.jpg">
                                 </div>
                                     <h5 class="card-title text-center" data-tipo="sabor-unico">Porção Picanha <br>e batata frita</h5>
-                                    <p class="alert alert-info text-center small">Variedade</p>
+                                    <p class="alert alert-info text-center small">Porção</p>
                                     <ul>
                                         <li>Picanha</li>
                                         <li>Batata frita</li>
@@ -508,7 +547,7 @@
                                     <img src="./IMG-20260119-WA0013.jpg">
                                 </div>
                                     <h5 class="card-title text-center" data-tipo="sabor-unico">Marmita<br>de picanha</h5>
-                                    <p class="alert alert-info text-center small">Variedade</p>
+                                    <p class="alert alert-info text-center small">Prato</p>
                                     <ul class="mb-0">
                                         <li>Picanha</li>
                                         <li>Arroz</li>
@@ -528,7 +567,7 @@
                                     <img src="./IMG-20260127-WA0004.jpg">
                                 </div>
                                     <h5 class="card-title text-center" data-tipo="sabor-unico">Marmita<br>de frango</h5>
-                                    <p class="alert alert-info text-center small">Variedade</p>
+                                    <p class="alert alert-info text-center small">Prato</p>
                                     <ul>
                                         <li>Frango</li>
                                         <li>Arroz</li>
@@ -542,10 +581,10 @@
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
                                 <div class="carrosel">
-                                    <img src="./IMG-20260127-WA0004.jpg">
+                                    <img src="./IMG-20260127-WA0005.jpg">
                                 </div>
                                     <h5 class="card-title text-center" data-tipo="sabor-unico">Marmita<br>bife na chapa</h5>
-                                    <p class="alert alert-info text-center small">Variedade</p>
+                                    <p class="alert alert-info text-center small">Prato</p>
                                     <ul>
                                         <li>Bife</li>
                                         <li>Arroz</li>
@@ -560,34 +599,10 @@
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
                                 <div class="carrosel">
-                                    <img src="./Açai(1).png">
-                                    <img src="./Açai(1).png">
-                                    <img src="./Açai-de-kiwi.png">
-                                </div>
-                                    <h5 class="card-title text-center" data-tipo="sabor-unico">Porção Quero <br>+</h5>
-                                    <p class="alert alert-info text-center small">Porção</p>
-                                    <ul>
-                                        <li>Picanha</li>
-                                        <li>Frango frito</li>
-                                        <li>Salgadinhos</li>
-                                        <li>+..</li>
-                                        <li class="d-none">Palito de queso</li>
-                                        <li class="d-none">Polenta frita</li>
-                                        <li class="d-none">Cebola ralada</li>
-                                        <li class="d-none">Calabreza</li>
-                                        <li class="d-none">Batata frita</li>
-                                    </ul>
-                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary valor">100000 Gs</h5>
-                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar ao carrinho</button>
-                                </div>
-                        </div>
-                        <div class="card produto mx-2 mb-3">
-                            <div class="card-body">
-                                <div class="carrosel">
                                     <img src="./IMG-20260119-WA0020.jpg">
                                 </div>
                                     <h5 class="card-title text-center" data-tipo="sabor-unico">Jantinha</h5>
-                                    <p class="alert alert-info text-center small">Porção</p>
+                                    <p class="alert alert-info text-center small">Prato</p>
                                     <ul>
                                         <li>Carne na chapa</li>
                                         <li>Arroz</li>
@@ -598,6 +613,23 @@
                                         <li class="d-none">Farofa</li>
                                     </ul>
                                     <h5 class="text-center mb-1 mt-1 alert alert-secondary valor">35000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar ao carrinho</button>
+                                </div>
+                        </div>
+                        <div class="card produto mx-2 mb-3">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./IMG-20260203-WA0005.jpg">
+                                </div>
+                                    <h5 class="card-title text-center" data-tipo="sabor-unico">Jantinha<br>de carne</h5>
+                                    <p class="alert alert-info text-center small">Prato</p>
+                                    <ul>
+                                        <li>Carne</li>
+                                        <li>Arroz</li>
+                                        <li>Batata frita</li>
+                                        <li>Salada</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary valor">39000 Gs</h5>
                                     <button class="btn btn-primary adicionar-carrinho w-100">Adicionar ao carrinho</button>
                                 </div>
                         </div>
@@ -696,7 +728,7 @@
                     </div>
                 </div>
             <div class="container">
-                <h2 class="display-6 mb-4" id="hamburgueres">Hambúrgueres</h2>
+                <h2 class="display-6 mb-4" id="hamburgueres">Hambúrgueres<i class="ms-2 hamburguer-icon" data-lucide="sandwich"></i></h2>
                 <div class="cards-açai mx-1">
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
@@ -759,7 +791,30 @@
                 </div>
             </div>
             <div class="container">
-                <h2 class="display-6 mb-4" id="salgados-fritos">Salgados Fritos</h2>
+                <h2 class="display-6 mb-4" id="pizzas">Pizzas<i class="ms-2 icone-pizza" data-lucide="pizza"></i></h2>
+                <div class="produto-unico row justify-content-center mx-1">
+                        <div class="col-12 col-md-6 col-lg-5">
+                        <div class="card produto mb-3">
+                            <div class="card-body">
+                                <div class="carrosel">
+                                    <img src="./IMG-20260203-WA0010.jpg">
+                                    <img src="./IMG-20260203-WA0009.jpg">
+                                </div>
+                                    <h5 class="card-title text-center" data-tipo="sabor-unico">Pizza<br>de calabresa</h5>
+                                    <p class="alert alert-info text-center small">Pizza</p>
+                                    <ul class="mb-0">
+                                        <li>Calabresa</li>
+                                        <li>8 Pedaços</li>
+                                    </ul>
+                                    <h5 class="text-center mb-1 mt-1 alert alert-secondary valor">60000 Gs</h5>
+                                    <button class="btn btn-primary adicionar-carrinho w-100">Adicionar ao carrinho</button>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+            <div class="container">
+                <h2 class="display-6 mb-4" id="salgados-fritos">Salgados Fritos<i  class="ms-2 icone-pastel" data-lucide="croissant"></i></h2>
                 <div class="cards-açai mx-1">
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
@@ -941,7 +996,7 @@
                 </div>
             </div>
             <div class="container">
-                <h2 class="display-6 mb-4" id="salgados-assados">Salgados Assados</h2>
+                <h2 class="display-6 mb-4" id="salgados-assados">Salgados Assados<i  class="ms-2 icone-pastel" data-lucide="croissant"></i></h2>
                 <div class="cards-açai mx-1">
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
@@ -990,7 +1045,7 @@
                 </div>
             </div>
                 <div class="container">
-                <h2 class="display-6 mb-4" id="postres">Sobremesas</h2>
+                <h2 class="display-6 mb-4" id="postres">Sobremesas<i class="ms-2 icone-sobremesa" data-lucide="cake-slice"></i></h2>
                 <div class="cards-açai mx-1">
                         <div class="card produto mx-2 mb-3">
                             <div class="card-body">
@@ -1223,7 +1278,7 @@
                 </div>
             </div>
             <div class="container">
-                <h2 class="display-6 mb-4" id="bebidas">Bebidas</h2>
+                <h2 class="display-6 mb-4 align-items-center" id="bebidas">Refrigerantes<i class="ms-2 icone-refrigerante" data-lucide="cup-soda"></i></h2>
                 <div class="cards-açai mx-1">
                     <div class="card produto mx-2 mb-3">
                         <div class="card-body">
@@ -1435,6 +1490,9 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        lucide.createIcons();
+    </script>
     <script src="main.js"></script>
 </body>
 </html>

@@ -18,6 +18,9 @@ header .container-cabecalho{
     color: #fff;
     margin: 0 20px;
     height: 90px;
+    font-family: "Marcellus", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 header .container-cabecalho #carrinho{
     background-color: transparent;
@@ -41,6 +44,9 @@ header .texto-abaixo-cabecalho{
     display: flex;
     justify-content: center;
     color: #ffffff;
+    font-family: "Marcellus", serif;
+    font-weight: 400;
+    font-style: normal;
 } 
 header #horario{
     font-size: 18px;
@@ -57,7 +63,27 @@ header #horario{
     color: #fff;
     border-radius: 10px;
 }
-
+.bola-de-sorvete-icon{
+    color: rgb(75, 0, 119);
+}
+.icone-comida {
+    color: #6b0303;
+}
+.hamburguer-icon {
+    color:  #6b0303;
+}
+.icone-pastel{
+    color:  #6b0303;
+}
+.icone-pizza{
+    color:  #6b0303;
+}
+.icone-sobremesa{
+    color: rgb(253, 35, 235);
+}
+.icone-refrigerante{
+    color: rgb(139, 0, 0);
+}
 header .texto-abaixo-cabecalho p{
     padding-bottom: 10px;
     text-transform:capitalize;
@@ -267,25 +293,25 @@ main .alerta{
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.cards-açai .card-body {
+.cards-açai .card-body, .produto-unico .card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
 }
 
-.cards-açai .card-title {
+.cards-açai .card-title, .produto-unico .card-title {
     min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.cards-açai .adicionar-carrinho {
+.cards-açai .adicionar-carrinho, .produto-unico .adicionar-carrinho {
     margin-top: 10px; 
 }
 
-.cards-açai .card-body ul {
+.cards-açai .card-body ul, .produto-unico .card-body ul {
     list-style: none;
     padding: 0;
     text-align: center;
@@ -298,21 +324,21 @@ main .alerta{
     justify-content: center;
 }
 
-.cards-açai .card-body ul li {
+.cards-açai .card-body ul li, .produto-unico .card-body ul li {
     display: inline-block;
     font-size: 0.85rem;
     color: #666;
 }
-.cards-açai .card-body ul li::after {
+.cards-açai .card-body ul li::after, .produto-unico .card-body ul li::after {
     content: " • ";
     color: #ccc;
     margin: 0 3px;
 }
-.cards-açai .card-body ul li:last-child::after {
+.cards-açai .card-body ul li:last-child::after, .produto-unico .card-body ul li:last-child::after {
     content: "";
 }
 
-.cards-açai .valor {
+.cards-açai .valor, .produto-unico .valor {
     background-color: transparent !important;
     border: none !important;
     color: rgb(75, 0, 119);
@@ -326,7 +352,7 @@ main .alerta{
     justify-content: center;
 }
 
-.cards-açai .alert-info {
+.cards-açai .alert-info, .produto-unico .alert-info {
     background-color: rgba(75, 0, 119, 0.1);
     color: rgb(75, 0, 119);
     border: none;
@@ -340,7 +366,7 @@ main .alerta{
     margin: 0 auto 5px auto;
     font-weight: 600;
 }
-.cards-açai .adicionar-carrinho {
+.cards-açai .adicionar-carrinho, .produto-unico .adicionar-carrinho {
     border-radius: 50px;
     font-weight: 600;
     letter-spacing: 0.5px;
