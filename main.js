@@ -758,6 +758,12 @@ document.addEventListener("click", function (event) {
                 carrinho.push(dadosProduto);
                 localStorage.setItem('carrinho', JSON.stringify(carrinho));
                 
+                alertaAdicao.querySelector("h5").innerText = "Produto adicionado ao carrinho!";
+                alertaAdicao.classList.add("alerta-ativo");
+                setTimeout(() => {
+                    alertaAdicao.classList.remove("alerta-ativo");
+                }, 1000);
+
                 fecharCardAberto();
             });
 
