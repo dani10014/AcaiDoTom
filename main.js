@@ -26,31 +26,33 @@ atualizarContador();
 
 
 function atualizarHora(){
-
     const agora = new Date();
+    const horaPy = parseInt(new Intl.DateTimeFormat('pt-BR',{
+        timeZone : "America/Asuncion",
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:false
+
+    }).format(agora));
+
+    const relogioTexto = agora.toLocaleTimeString('pt-BR', {
+        timeZone: 'America/Asuncion',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+    });
     
-    const horas = String(agora.getHours()).padStart(2, '0');
-    const minutos = String(agora.getMinutes()).padStart(2, '0');
-    
-    const horarioFormatado = horas + ":" + minutos;
-    horario.innerHTML = horarioFormatado;
+    horario.innerHTML = relogioTexto;
 
-    let horaAtual = agora.getHours();
-
-    if (!modalBootstrap && mensagemFechado) {
-        modalBootstrap = new bootstrap.Modal(mensagemFechado);
-    }
-
-    if (horaAtual > 5 && horaAtual < 22) {
+    if(horaPy >= 13){
         mensagemAberto.classList.add("aberto-ativo");
-        mensagemFechado.classList.remove("fechado-ativo");
-        if (modalBootstrap) modalBootstrap.hide();
-    }else {
-        mensagemAberto.classList.remove("aberto-ativo");
-        mensagemFechado.classList.add("fechado-ativo");
-        if (modalBootstrap && !mensagemFechado.classList.contains('show')) modalBootstrap.show();
+        modalBootstrap.hide()
     }
-}
+    else{
+        modalBootstrap.show();
+    }
+
+} 
 setInterval(atualizarHora, 1000);
 
 function fecharCardAberto() {
