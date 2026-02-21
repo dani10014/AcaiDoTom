@@ -177,8 +177,8 @@ if (dadosProdutos.length > 0) {
 
 let total = 0;
 dadosProdutos.forEach(dadosProduto => {
-    let precoTexto = dadosProduto.preco.replace("Gs", "").replace(",", ".").trim();
-    let valor = parseFloat(precoTexto);
+    // Remove tudo que não for número para garantir a conversão correta (ex: "10.000 Gs" vira 10000)
+    let valor = parseInt(dadosProduto.preco.replace(/[^\d]/g, '')) || 0;
     
     if (!isNaN(valor)) {
         total += valor;
@@ -229,8 +229,7 @@ botaoRemover.forEach(button => {
             quantidadeAtual--;
             quantidade.innerText = quantidadeAtual;
             let valorElement = event.target.closest(".card").querySelector(".valor");
-            let precoTexto = valorElement.getAttribute("data-preco").replace("Gs", "").replace(",", ".").trim();
-            let valorUnitario = parseFloat(precoTexto);
+            let valorUnitario = parseInt(valorElement.getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
             total -= valorUnitario;
             atualizarTotais(total);
             valorElement.innerText = `${(valorUnitario * quantidadeAtual).toLocaleString('pt-BR')} Gs`;
@@ -248,8 +247,7 @@ botaoAdicionarMais.forEach(button => {
         quantidadeAtual++;
         quantidade.innerText = quantidadeAtual;
         let valorElement = event.target.closest(".card").querySelector(".valor");
-        let precoTexto = valorElement.getAttribute("data-preco").replace("Gs", "").replace(",", ".").trim();
-        let valorUnitario = parseFloat(precoTexto);
+        let valorUnitario = parseInt(valorElement.getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
         total += valorUnitario;
         atualizarTotais(total);
 

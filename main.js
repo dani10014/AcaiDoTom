@@ -12,6 +12,25 @@ if (mensagemFechado) {
     modalBootstrap = new bootstrap.Modal(mensagemFechado);
 }
 
+function atualizarBotaoFlutuante(carrinho) {
+    let botaoFlutuante = document.getElementById("botao-carrinho-flutuante");
+    let spanValor = document.getElementById("valor-total-flutuante");
+
+    if (botaoFlutuante && spanValor) {
+        if (carrinho.length > 0) {
+            let total = 0;
+            carrinho.forEach(item => {
+                let preco = parseInt(item.preco.replace(/[^\d]/g, '')) || 0;
+                total += preco;
+            });
+            spanValor.innerText = `${total.toLocaleString('pt-BR')} Gs`;
+            botaoFlutuante.classList.add("ativo");
+        } else {
+            botaoFlutuante.classList.remove("ativo");
+        }
+    }
+}
+
 function atualizarContador() {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     if (contadorCarrinho) {
@@ -24,6 +43,7 @@ function atualizarContador() {
             contadorCarrinho.classList.add('contador-desativado');
         }
     }
+    atualizarBotaoFlutuante(carrinho);
 }
 setInterval(atualizarContador, 1000);
 atualizarContador();
@@ -50,10 +70,14 @@ function atualizarHora(){
 
     if(horaPy >= 13){
         mensagemAberto.classList.add("aberto-ativo");
-        modalBootstrap.hide()
+        if (modalBootstrap) {
+            modalBootstrap.hide();
+        }
     }
     else{
-        modalBootstrap.show();
+        if (modalBootstrap && !document.querySelector(".modal.show")) {
+            modalBootstrap.show();
+        }
     }
 
 } 
