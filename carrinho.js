@@ -1,6 +1,6 @@
 // --- CONFIGURAÇÃO DA LOJA ---
-const LOJA_LAT = -22.539468911839155;
-const LOJA_LNG = -55.73687930310499; 
+const LOJA_LAT = -22.539250466811982;
+const LOJA_LNG = -55.73690769760896; 
 
 let dadosProdutos = JSON.parse(localStorage.getItem('carrinho')) || [];
 let container = document.getElementById("lista-produtos");
@@ -14,7 +14,7 @@ let TAXA_ENTREGA_ATUAL = 0;
 let metodoPagamentoSelecionado = "Pix";
 const TAXA_CAMBIO = 1200;
 
-// --- FUNÇÃO MATEMÁTICA DE DISTÂNCIA ---
+// --- FUNÇÃO MATEMÁTICA DE DISTÂNCIA -----22.539250466811982, -55.73690769760896
 function calcularDistancia(lat1, lon1, lat2, lon2) {
     const R = 6371; 
     const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -186,7 +186,6 @@ function atribuirEventosBotoes() {
         };
     });
 }
-
 // --- GEOLOCALIZAÇÃO ---
 btnLocalizacao.addEventListener("click", () => {
     if (navigator.geolocation) {
@@ -196,51 +195,97 @@ btnLocalizacao.addEventListener("click", () => {
             const lngC = position.coords.longitude;
             const dist = calcularDistancia(LOJA_LAT, LOJA_LNG, latC, lngC);
             TAXA_ENTREGA_ATUAL = definirPrecoPorKM(dist);
+            // Procure essa linha dentro do navigator.geolocation e substitua:
             document.getElementById("endereco").value = `https://www.google.com/maps?q=${latC},${lngC}`;
             document.getElementById("exibir-taxa-entrega").innerText = `Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')} (${dist.toFixed(1)} km)`;
             btnLocalizacao.innerHTML = "✅ Frete Calculado";
             atualizarTotais();
         }, () => alert("Ative o GPS!"));
     }
+});// 1. Variável global para guardar o pagamento (começa com Pix porque o botão já é azul no HTML)
+
+// 2. Lógica de clique nos botões (Troca a cor e guarda o valor)
+const metodosPag = document.querySelectorAll(".botao-pag");
+
+metodosPag.forEach((botao) => {
+    botao.addEventListener("click", () => {
+        // Remove a cor azul (btn-primary) de todos e coloca a cinza (btn-outline-secondary)
+        metodosPag.forEach(b => {
+            b.classList.remove("btn-primary");
+            b.classList.add("btn-outline-secondary");
+        });
+
+        // Adiciona a cor azul apenas no que você clicou
+        botao.classList.add("btn-primary");
+        botao.classList.remove("btn-outline-secondary");
+
+        // Guarda o nome do pagamento (Dinheiro, Pix ou Cartão)
+        metodoPagamentoSelecionado = botao.querySelector(".fw-bold").innerText;
+
+        // Lógica do Troco: Se for Dinheiro, mostra o campo de troco
+        const divTroco = document.getElementById("div-troco");
+        if (metodoPagamentoSelecionado === "Dinheiro") {
+            divTroco.classList.remove("d-none");
+        } else {
+            divTroco.classList.add("d-none");
+        }
+        
+        console.log("Pagamento selecionado:", metodoPagamentoSelecionado);
+    });
 });
 
-// --- FINALIZAR WHATSAPP ---
-// --- FINALIZAR WHATSAPP ---
+// 3. Botão Finalizar Pedido (Sem o erro de latC e pegando o pagamento certo)
 btnFinalizarPedido.addEventListener("click", (e) => {
     e.preventDefault();
+
     let nome = document.getElementById("nome").value;
     let endereco = document.getElementById("endereco").value;
-    if (!nome || !endereco || TAXA_ENTREGA_ATUAL === 0) return alert("Preencha tudo e calcule o frete!");
+    let valorTroco = document.getElementById("troco").value;
+
+    if (!nome || !endereco || TAXA_ENTREGA_ATUAL === 0) {
+        return alert("Preencha nome, endereço e calcule o frete!");
+    }
 
     let totalGeral = atualizarTotais();
     let totalReais = Math.floor(totalGeral / TAXA_CAMBIO);
-    let msg = `👋 *Novo Pedido!* 🛒\n\n👤 *Cliente:* ${nome}\n`;
     
+    let msg = `👋 *Novo Pedido!* 🛒\n\n`;
+    msg += `👤 *Cliente:* ${nome}\n`;
     msg += `----------------------------------\n`;
 
     document.querySelectorAll(".cards").forEach(card => {
-        // --- AQUI ESTÁ O AJUSTE ---
-        let nomeProduto = card.querySelector("h5").innerText;
+        let nomeProduto = card.querySelector("h5").innerText.replace(/\n/g, ' '); 
         let qtd = card.querySelector(".quantidade").innerText;
         let valor = card.querySelector(".valor").innerText;
-        let ml = card.querySelector(".alert-info").innerText; // Pegamos o ML que está na tela
+        let ml = card.querySelector(".alert-info").innerText;
 
-        msg += `🔹 *${nomeProduto}* - ${ml}\n`; // Adicionamos o ML na mensagem
-        msg += `   (${qtd}x) - ${valor}\n`;
+        msg += `🔹 *${nomeProduto}* (${ml})\n`;
         
+        let detalhes = [];
+        card.querySelectorAll("ul li").forEach(li => {
+            let texto = li.innerText.trim();
+            if (!texto.includes("Puro") && !texto.includes("Sem adicionais")) {
+                detalhes.push(texto);
+            }
+        });
+
+        if (detalhes.length > 0) msg += `   _Opções: ${detalhes.join(", ")}_\n`;
+        msg += `   [${qtd}x] - ${valor}\n\n`;
     });
 
     msg += `----------------------------------\n`;
+    msg += `💳 *Pagamento:* ${metodoPagamentoSelecionado}\n`;
+    
+    if (metodoPagamentoSelecionado === "Dinheiro" && valorTroco) {
+        msg += `💵 *Troco para:* ${valorTroco}\n`;
+    }
+
     msg += `🛵 *Entrega:* Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')}\n`;
+    msg += `💰 *TOTAL: Gs ${totalGeral.toLocaleString('pt-BR')}* (R$ ${totalReais})\n`;
     msg += `----------------------------------\n`;
-    msg += `💳 *Pagamento via:* ${metodoPagamentoSelecionado}\n`
-    msg += `💰 *TOTAL:* *Gs ${totalGeral.toLocaleString('pt-BR')}* (R$ ${totalReais})\n`;
-    msg += `----------------------------------\n`;
-    msg += `Endereço de entrega:`
     msg += `📍 *Endereço:* ${endereco}\n`;
 
     window.open(`https://wa.me/595976652307?text=${encodeURIComponent(msg)}`, "_blank");
 });
-
 // Inicialização
 renderizarCarrinho();
