@@ -23,7 +23,6 @@ function atualizarBotaoFlutuante(carrinho) {
                 let preco = parseInt(item.preco.replace(/[^\d]/g, '')) || 0;
                 total += preco;
             });
-            total += 10000;
             spanValor.innerText = `${total.toLocaleString('pt-BR')} Gs`;
             botaoFlutuante.classList.add("ativo");
         } else {
@@ -916,13 +915,13 @@ document.addEventListener("click", function (event) {
 
                 let listaAcompanhamentos = [];
                 if (nomeProdutoCheck.includes("bola-de-sorvete")) {
-                     Produto.querySelectorAll(".quantidade-sabor").forEach(span => {
+                    Produto.querySelectorAll(".quantidade-sabor").forEach(span => {
                         let qtd = parseInt(span.innerText);
                         if(qtd > 0) {
                             let nomeSabor = span.closest(".d-flex.flex-column").querySelector(".sabor-nome").innerText;
                             listaAcompanhamentos.push(`${nomeSabor} (${qtd}x)`);
                         }
-                     });
+                    });
                 } else {
                     listaAcompanhamentos = Array.from(inputsAcompanhamentos)
                         .filter(input => input.checked && input.name !== 'Ml-suco' && input.name !== 'tamanho-frango')
