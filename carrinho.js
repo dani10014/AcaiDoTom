@@ -104,6 +104,7 @@ function renderizarCarrinho() {
                                     <h5 class="fw-bold mb-0">${produto.nome}</h5>
                                     <button class="btn btn-sm text-danger excluir" data-index="${index}">✕</button>
                                 </div>
+                                <p class="alert alert-info w-50 p-2 mt-3">${produto.ml}</p>
                                 <div class="small text-muted mt-2">
                                     <ul class="list-unstyled border-start ps-2 mb-1" style="border-left: 3px solid #ffc107 !important;">
                                         <span class="fw-bold text-dark" style="font-size: 0.8em;">Acompanhamentos:</span>
@@ -204,6 +205,7 @@ btnLocalizacao.addEventListener("click", () => {
 });
 
 // --- FINALIZAR WHATSAPP ---
+// --- FINALIZAR WHATSAPP ---
 btnFinalizarPedido.addEventListener("click", (e) => {
     e.preventDefault();
     let nome = document.getElementById("nome").value;
@@ -214,9 +216,19 @@ btnFinalizarPedido.addEventListener("click", (e) => {
     let totalReais = Math.floor(totalGeral / TAXA_CAMBIO);
     let msg = `👋 *Novo Pedido!* 🛒\n\n👤 *Cliente:* ${nome}\n`;
     msg += `----------------------------------\n`;
+
     document.querySelectorAll(".cards").forEach(card => {
-        msg += `🔹 *${card.querySelector("h5").innerText}* (${card.querySelector(".quantidade").innerText}x) - ${card.querySelector(".valor").innerText}\n`;
+        // --- AQUI ESTÁ O AJUSTE ---
+        let nomeProduto = card.querySelector("h5").innerText;
+        let qtd = card.querySelector(".quantidade").innerText;
+        let valor = card.querySelector(".valor").innerText;
+        let ml = card.querySelector(".alert-info").innerText; // Pegamos o ML que está na tela
+
+        msg += `🔹 *${nomeProduto}* - ${ml}\n`; // Adicionamos o ML na mensagem
+        msg += `   (${qtd}x) - ${valor}\n`;
+        // --------------------------
     });
+
     msg += `----------------------------------\n`;
     msg += `🛵 *Entrega:* Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')}\n`;
     msg += `💰 *TOTAL:* *Gs ${totalGeral.toLocaleString('pt-BR')}* (R$ ${totalReais})\n`;
