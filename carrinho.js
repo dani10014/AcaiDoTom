@@ -1,370 +1,267 @@
+// --- CONFIGURAÇÃO DA LOJA (PEQUE NO GOOGLE MAPS) ---
+const LOJA_LAT = -22.539468911839155;
+const LOJA_LNG = -55.73687930310499; 
+
 let dadosProdutos = JSON.parse(localStorage.getItem('carrinho')) || [];
 let container = document.getElementById("lista-produtos");
+let totalDaCompra = document.querySelector(".total-a-pagar");
+let btnFinalizarPedido = document.getElementById("finalizarpedido");
+let btnLocalizacao = document.getElementById("btn-localizacao");
+let inputTroco = document.getElementById("troco");
+let divTroco = document.getElementById("div-troco");
+
+let TAXA_ENTREGA_ATUAL = 0;
+let metodoPagamentoSelecionado = "Pix";
+const TAXA_CAMBIO = 1200;
+
+// --- FUNÇÃO MATEMÁTICA DE DISTÂNCIA ---
+function calcularDistancia(lat1, lon1, lat2, lon2) {
+    const R = 6371; 
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c; 
+}
+
+// --- SUA TABELA DE PREÇOS ATUALIZADA ---
+function definirPrecoPorKM(distancia) {
+    if (distancia < 1.0) {
+        return 0; 
+    }
+    if (distancia >= 1.0 && distancia <= 2.6) {
+        return 5000;
+    }
+    if (distancia > 2.6 && distancia <= 4.0) {
+        return 10000;
+    }
+    if (distancia > 4.0 && distancia <= 6.0) {
+        return 15000;
+    }
+    return 15000; 
+}          
+
+// --- CONTROLE DO MODAL DE PAGAMENTO (REATIVADO) ---
 let botaoConfirmarPagamento = document.querySelector(".confirmar-pagamento");
 let cardPagamento = document.querySelector(".card-de-pagamento");
 let fecharMenuPagamento = document.querySelector(".btn-fechar-pagamento");
-let totalDaCompra = document.querySelector(".total-a-pagar");
-let btnFinalizarPedido = document.getElementById("finalizarpedido")
-let btnLocalizacao = document.getElementById("btn-localizacao");
 
-let btnPagEntrega = document.getElementById("btn-pag-entrega");
-let btnPagPix = document.getElementById("btn-pag-pix");
-let btnPagCartao = document.getElementById("btn-pag-cartao");
-let divTroco = document.getElementById("div-troco");
-let inputTroco = document.getElementById("troco");
-let metodoPagamentoSelecionado = "Pix";
-const TAXA_CAMBIO = 1200;
-const TAXA_ENTREGA = 10000;
-
-function atualizarTotais(valor) {
-    let valorReais = valor / TAXA_CAMBIO;
-    let html = `Gs ${valor.toLocaleString('pt-BR')} <br><span class="small text-muted" style="font-size: 0.6em">(R$ ${valorReais.toLocaleString('pt-BR', {minimumFractionDigits: 2})})</span>`;
-    document.getElementById("valor-total").innerHTML = html;
-    totalDaCompra.innerHTML = html;
-}
-
-if(btnPagEntrega && btnPagPix && btnPagCartao) {
-    btnPagEntrega.addEventListener("click", () => {
-        metodoPagamentoSelecionado = "Dinheiro/Entrega";
-        
-    
-        btnPagEntrega.classList.remove("btn-outline-secondary");
-        btnPagEntrega.classList.add("btn-primary", "border-2");
-        
-        btnPagPix.classList.remove("btn-primary", "border-2");
-        btnPagPix.classList.add("btn-outline-secondary");
-
-        btnPagCartao.classList.remove("btn-primary", "border-2");
-        btnPagCartao.classList.add("btn-outline-secondary");
-        
-    
-        divTroco.classList.remove("d-none");
-    });
-
-    btnPagPix.addEventListener("click", () => {
-        metodoPagamentoSelecionado = "Pix";
-        
-        btnPagPix.classList.remove("btn-outline-secondary");
-        btnPagPix.classList.add("btn-primary", "border-2");
-        
-        btnPagEntrega.classList.remove("btn-primary", "border-2");
-        btnPagEntrega.classList.add("btn-outline-secondary");
-
-        btnPagCartao.classList.remove("btn-primary", "border-2");
-        btnPagCartao.classList.add("btn-outline-secondary");
-        
-        divTroco.classList.add("d-none");
-        inputTroco.value = "";
-    });
-    btnPagCartao.addEventListener("click", () => {
-        metodoPagamentoSelecionado = "Cartão";
-        
-        btnPagCartao.classList.remove("btn-outline-secondary");
-        btnPagCartao.classList.add("btn-primary", "border-2");
-        
-        btnPagPix.classList.remove("btn-primary", "border-2");
-        btnPagPix.classList.add("btn-outline-secondary");
-
-        btnPagEntrega.classList.remove("btn-primary", "border-2");
-        btnPagEntrega.classList.add("btn-outline-secondary");
-        
-        divTroco.classList.add("d-none");
-        inputTroco.value = "";
-    });
-}
-    
-
-if(dadosProdutos.length === 0){
-    let mensagem = `<div class="row">
-                        <div class="col-12">
-                        <h1 class="text-center display-6">Carrinho está vazio!</h1>
-                        </div>
-                    </div>`
-                    ;
-                container.innerHTML += mensagem;
-    botaoConfirmarPagamento.style.display = "none";
-}
-dadosProdutos.forEach((dadosProduto, index) => {
-    let listaAcompanhamentos = "";
-    let mostrarAcompanhamentos = false;
-
-    if (dadosProduto.acompanhamentos && Array.isArray(dadosProduto.acompanhamentos) && dadosProduto.acompanhamentos.length > 0) {
-        listaAcompanhamentos = dadosProduto.acompanhamentos.map(item => `<li>${item}</li>`).join("");
-        mostrarAcompanhamentos = true;
-    } else {
-        if (dadosProduto.nome.toLowerCase().includes("açaí") || dadosProduto.nome.toLowerCase().includes("acai")) {
-            listaAcompanhamentos = "<li class='text-muted small' style='list-style:none'><em>Somente açaí (sem acompanhamentos)</em></li>";
-            mostrarAcompanhamentos = true;
+if (botaoConfirmarPagamento && cardPagamento) {
+    botaoConfirmarPagamento.addEventListener("click", () => {
+        if (dadosProdutos.length > 0) {
+            cardPagamento.classList.add("ativo-card-de-pagamento");
+        } else {
+            alert("O seu carrinho está vazio!");
         }
-    }
-    let listaAdicionais = "";
-    if (dadosProduto.adicionais && Array.isArray(dadosProduto.adicionais) && dadosProduto.adicionais.length > 0) {
-        listaAdicionais = dadosProduto.adicionais.map(item => `<li>${item}</li>`).join("");
-    }
-
-    let midiaHtml = "";
-    if (dadosProduto.imagem && dadosProduto.imagem.endsWith(".mp4")) {
-        midiaHtml = `<video src="${dadosProduto.imagem}" class="img-fluid rounded" style="max-height: 140px; object-fit: contain;" autoplay muted loop playsinline></video>`;
-    } else {
-        midiaHtml = `<img src="${dadosProduto.imagem}" class="img-fluid rounded" style="max-height: 140px; object-fit: contain;">`;
-    }
-
-    let html = `
-    <div class="col-12 col-md-8 mb-3 cards">
-        <div class="card shadow-sm border-0 rounded-3">
-            <div class="card-body p-3">
-                <div class="row g-3 align-items-center">
-                    <div class="col-4 text-center">
-                        ${midiaHtml}
-                    </div>
-                    
-                    <div class="col-8">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div>
-                                <h5 class="card-title mb-0 fw-bold">${dadosProduto.nome}</h5>
-                                <small class="text-muted badge bg-light text-dark border mt-1">${dadosProduto.ml}</small>
-                            </div>
-                            <button class="btn btn-sm btn-outline-danger excluir border-0" data-index="${index}" title="Remover item">✕</button>
-                        </div>
-
-                        ${mostrarAcompanhamentos ? `<div class="mb-2">
-                            <small class="fw-bold text-secondary">Acompanhamentos:</small>
-                            <ul class="list-unstyled small mb-0 ps-2 border-start border-3 border-light text-muted">
-                                ${listaAcompanhamentos}
-                            </ul>
-                        </div>` : ''}
-
-                        ${listaAdicionais ? `
-                        <div class="mb-2">
-                            <small class="fw-bold text-secondary">Adicionais:</small>
-                            <ul class="list-unstyled small mb-0 ps-2 border-start border-3 border-warning text-muted">
-                                ${listaAdicionais}
-                            </ul>
-                        </div>` : ''}
-
-                        <div class="d-flex justify-content-between align-items-end mt-3 pt-2 border-top">
-                            <h5 class="mb-0 text-primary fw-bold valor" data-preco="${dadosProduto.preco}">${dadosProduto.preco}</h5>
-                            
-                            <div class="d-flex align-items-center bg-light rounded-pill border px-2 py-1">
-                                <button class="btn btn-sm btn-link text-decoration-none text-dark p-0 menos" style="width: 20px;">-</button>
-                                <span class="mx-2 fw-bold small quantidade">1</span>
-                                <button class="btn btn-sm btn-link text-decoration-none text-dark p-0 mais" style="width: 20px;">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>`;
-                container.innerHTML += html;
-});
-
-if (dadosProdutos.length > 0) {
-    let htmlEntrega = `
-    <div class="col-12 col-md-8 mb-3">
-        <div class="card shadow-sm border-0 rounded-3">
-            <div class="card-body p-3 d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <span style="font-size: 1.5rem; margin-right: 10px;">🛵</span>
-                    <h5 class="card-title mb-0 fw-bold text-muted">Taxa de Entrega</h5>
-                </div>
-                <h5 class="mb-0 text-primary fw-bold">${TAXA_ENTREGA.toLocaleString('pt-BR')} Gs</h5>
-            </div>
-        </div>
-    </div>`;
-    container.innerHTML += htmlEntrega;
+    });
 }
 
-let total = 0;
-dadosProdutos.forEach(dadosProduto => {
-    // Remove tudo que não for número para garantir a conversão correta (ex: "10.000 Gs" vira 10000)
-    let valor = parseInt(dadosProduto.preco.replace(/[^\d]/g, '')) || 0;
+if (fecharMenuPagamento && cardPagamento) {
+    fecharMenuPagamento.addEventListener("click", () => {
+        cardPagamento.classList.remove("ativo-card-de-pagamento");
+    });
+}
+
+// Seletor de métodos de pagamento (opcional, caso tenha sumido)
+document.querySelectorAll(".btn-pag").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        metodoPagamentoSelecionado = e.target.innerText;
+        // Lógica simples para mostrar/esconder campo de troco
+        if(metodoPagamentoSelecionado.includes("Dinheiro")) {
+            if(divTroco) divTroco.classList.remove("d-none");
+        } else {
+            if(divTroco) divTroco.classList.add("d-none");
+        }
+    });
+});
+function atualizarTotais() {
+    let subtotalProdutos = 0;
+    document.querySelectorAll(".cards").forEach(card => {
+        let precoUnitario = parseInt(card.querySelector(".valor").getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
+        let qtd = parseInt(card.querySelector(".quantidade").innerText) || 1;
+        subtotalProdutos += (precoUnitario * qtd);
+    });
+
+    let totalGeral = subtotalProdutos + TAXA_ENTREGA_ATUAL;
     
-    if (!isNaN(valor)) {
-        total += valor;
-    }
-});
-if (dadosProdutos.length > 0) {
-    total += TAXA_ENTREGA;
+    // USANDO Math.round() para converter Gs em R$ e ficar um número inteiro
+    let valorReais = Math.floor(totalGeral / TAXA_CAMBIO);
+
+    // .toLocaleString('pt-BR') sem as casas decimais
+    let html = `Gs ${totalGeral.toLocaleString('pt-BR')} <br><span style="font-size: 0.6em">(R$ ${valorReais.toLocaleString('pt-BR')})</span>`;
+    
+    if(document.getElementById("valor-total")) document.getElementById("valor-total").innerHTML = html;
+    if(totalDaCompra) totalDaCompra.innerHTML = html;
+    
+    return totalGeral;
 }
-atualizarTotais(total);
 
-let botaoExcluir = document.querySelectorAll(".excluir");
+// --- RENDERIZAR ITENS (LIMPO E ORGANIZADO) ---
+container.innerHTML = ""; // Limpa o container antes de desenhar
 
-botaoExcluir.forEach(button => {
-    button.addEventListener("click", (event) => {
-        let index = event.target.getAttribute("data-index");
+if (dadosProdutos.length === 0) {
+    container.innerHTML = `<h1 class="text-center display-6">Carrinho vazio!</h1>`;
+    TAXA_ENTREGA_ATUAL = 0; 
+} else {
+    // 1. Desenha os Produtos
+    dadosProdutos.forEach((produto, index) => {
+        // Lógica do "Puro" para acompanhamentos e adicionais
+        let acompanhamentos = (produto.acompanhamentos && produto.acompanhamentos.length > 0) 
+            ? produto.acompanhamentos.map(i => `<li>${i}</li>`).join("") 
+            : "<li><i>Puro (Sem acompanhamentos)</i></li>";
+
+        let adicionais = (produto.adicionais && produto.adicionais.length > 0) 
+            ? produto.adicionais.map(i => `<li>${i}</li>`).join("") 
+            : "<li><i>Sem adicionais</i></li>";
+        
+        container.innerHTML += `
+        <div class="col-12 col-md-8 mb-3 cards">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-3">
+                    <div class="row align-items-center">
+                        <div class="col-4"><img src="${produto.imagem}" class="img-fluid rounded"></div>
+                        <div class="col-8">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="fw-bold mb-0">${produto.nome}</h5>
+                                <button class="btn btn-sm text-danger excluir" data-index="${index}">✕</button>
+                            </div>
+                            <ul class="list-unstyled small text-muted border-start ps-2 mt-1">
+                                ${acompanhamentos} ${adicionais}
+                            </ul>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span class="fw-bold text-primary valor" data-preco="${produto.preco}">${produto.preco}</span>
+                                <div class="bg-light rounded-pill px-2">
+                                    <button class="btn btn-sm menos">-</button>
+                                    <span class="mx-2 quantidade">1</span>
+                                    <button class="btn btn-sm mais">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    });
+
+    // 2. Desenha o Card da Taxa (Só se tiver produto)
+    container.innerHTML += `
+        <div class="col-12 col-md-8 mb-3" id="card-taxa">
+            <div class="card border-warning shadow-sm">
+                <div class="card-body d-flex justify-content-between py-2">
+                    <span>🛵 Taxa de Entrega</span>
+                    <span class="fw-bold text-primary" id="exibir-taxa-entrega">
+                        ${TAXA_ENTREGA_ATUAL > 0 ? 'Gs ' + TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR') : 'Calcule na localização'}
+                    </span>
+                </div>
+            </div>
+        </div>`;
+}
+
+/// --- EVENTO BOTÃO MAIS ---
+document.querySelectorAll(".mais").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        let card = e.target.closest(".cards"); // Acha o card desse produto
+        let qtdElemento = card.querySelector(".quantidade");
+        let precoElemento = card.querySelector(".valor");
+        
+        // Pega o preço unitário que guardamos no data-preco
+        let precoUnitario = parseInt(precoElemento.getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
+        
+        // Aumenta a quantidade
+        let novaQtd = parseInt(qtdElemento.innerText) + 1;
+        qtdElemento.innerText = novaQtd;
+        
+        // Atualiza o valor NO CARD (Preço Unitário x Quantidade)
+        let novoSubtotal = precoUnitario * novaQtd;
+        precoElemento.innerText = `${novoSubtotal.toLocaleString('pt-BR')} Gs`;
+        
+        atualizarTotais(); 
+    });
+});
+
+
+document.querySelectorAll(".menos").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        let card = e.target.closest(".cards");
+        let qtdElemento = card.querySelector(".quantidade");
+        let precoElemento = card.querySelector(".valor");
+        
+        let precoUnitario = parseInt(precoElemento.getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
+        let qtdAtual = parseInt(qtdElemento.innerText);
+
+        if (qtdAtual > 1) {
+            let novaQtd = qtdAtual - 1;
+            qtdElemento.innerText = novaQtd;
+            
+            // Atualiza o valor NO CARD
+            let novoSubtotal = precoUnitario * novaQtd;
+            precoElemento.innerText = `${novoSubtotal.toLocaleString('pt-BR')} Gs`;
+            
+            atualizarTotais();
+        }
+    });
+});
+
+document.querySelectorAll(".excluir").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        let index = e.target.getAttribute("data-index");
         dadosProdutos.splice(index, 1);
         localStorage.setItem('carrinho', JSON.stringify(dadosProdutos));
         location.reload();
-    })
-})
-
-botaoConfirmarPagamento.addEventListener("click", () => {
-        cardPagamento.classList.add("ativo-card-de-pagamento");
-});
-fecharMenuPagamento.addEventListener("click", () => {
-    cardPagamento.classList.remove("ativo-card-de-pagamento");
-});
-
-atualizarTotais(total);
-
-
-let botaoAdicionarMais = document.querySelectorAll(".mais");
-let botaoRemover = document.querySelectorAll(".menos")
-
-botaoRemover.forEach(button => {
-    button.addEventListener("click", (event) => {
-        let quantidade = event.target.closest(".card").querySelector(".quantidade");
-        let quantidadeAtual = parseInt(quantidade.innerText);
-
-        if(quantidadeAtual === 1){
-            let blocoAlerta = document.querySelector(".alerta");
-            blocoAlerta.classList.add("ativo")
-            setTimeout(() => {
-                blocoAlerta.classList.remove("ativo");
-            }, 1000);
-        }
-        if(quantidadeAtual > 1){
-            quantidadeAtual--;
-            quantidade.innerText = quantidadeAtual;
-            let valorElement = event.target.closest(".card").querySelector(".valor");
-            let valorUnitario = parseInt(valorElement.getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
-            total -= valorUnitario;
-            atualizarTotais(total);
-            valorElement.innerText = `${(valorUnitario * quantidadeAtual).toLocaleString('pt-BR')} Gs`;
-            
-        }
-        
     });
 });
 
-botaoAdicionarMais.forEach(button => {
-    button.addEventListener("click", (event) => {
-        let quantidade = event.target.closest(".card").querySelector(".quantidade");
-        let quantidadeAtual = parseInt(quantidade.innerText);
-
-        quantidadeAtual++;
-        quantidade.innerText = quantidadeAtual;
-        let valorElement = event.target.closest(".card").querySelector(".valor");
-        let valorUnitario = parseInt(valorElement.getAttribute("data-preco").replace(/[^\d]/g, '')) || 0;
-        total += valorUnitario;
-        atualizarTotais(total);
-
-        valorElement.innerText = `${(valorUnitario * quantidadeAtual).toLocaleString('pt-BR')} Gs`;
-
-    })
-});
-
-
-
+// --- GEOLOCALIZAÇÃO E CÁLCULO REAL ---
 btnLocalizacao.addEventListener("click", () => {
     if (navigator.geolocation) {
-
-        btnLocalizacao.innerHTML = "⏳ Buscando...";
-        btnFinalizarPedido.classList.add("disabled");
-        btnFinalizarPedido.innerHTML = "⏳ Aguardando localização...";
-        
+        btnLocalizacao.innerHTML = "⏳ Calculando...";
         navigator.geolocation.getCurrentPosition((position) => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
+            const latC = position.coords.latitude;
+            const lngC = position.coords.longitude;
             
+            const dist = calcularDistancia(LOJA_LAT, LOJA_LNG, latC, lngC);
+            TAXA_ENTREGA_ATUAL = definirPrecoPorKM(dist);
             
-            const linkMaps = `https://www.google.com/maps?q=${lat},${lng}`;
-            document.getElementById("endereco").value = linkMaps;
-            btnLocalizacao.innerHTML = "✅ Localização Definida";
+            document.getElementById("endereco").value = `https://www.google.com/maps?q=${latC},${lngC}`;
+            document.getElementById("exibir-taxa-entrega").innerText = `Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')} (${dist.toFixed(1)} km)`;
             
-            const mapaPreview = document.getElementById("mapa-preview");
-            mapaPreview.innerHTML = `<iframe width="100%" height="200" frameborder="0" style="border:0; border-radius: 10px;" src="https://maps.google.com/maps?q=${lat},${lng}&hl=pt&z=16&output=embed"></iframe>`;
-            
-            btnFinalizarPedido.classList.remove("disabled");
-            btnFinalizarPedido.innerHTML = "Finalizar pedido";
-
-        }, () => {
-            alert("Erro ao obter sua localização. Verifique se o GPS está ativo.");
-            btnLocalizacao.innerHTML = "❌ Tentar Novamente";
-            btnFinalizarPedido.classList.remove("disabled");
-            btnFinalizarPedido.innerHTML = "Finalizar pedido";
-        });
-    } else {
-        alert("Seu navegador não suporta geolocalização.");
+            btnLocalizacao.innerHTML = "✅ Frete Calculado";
+            atualizarTotais();
+        }, () => alert("Ative o GPS para calcular o frete!"));
     }
 });
 
-btnFinalizarPedido.addEventListener("click", function(event) {
-    event.preventDefault();
-
+// --- FINALIZAR WHATSAPP ---
+btnFinalizarPedido.addEventListener("click", (e) => {
+    e.preventDefault();
     let nome = document.getElementById("nome").value;
     let endereco = document.getElementById("endereco").value;
 
-    if (nome.trim() === "") {
-        alert("Por favor, preencha seu Nome Completo antes de finalizar.");
-        return;
-    }
-    
-    if (endereco.trim() === "") {
-        alert("Por favor, informe o endereço de entrega ou use a localização.");
-        return;
+    if (!nome || !endereco || TAXA_ENTREGA_ATUAL === 0) {
+        return alert("Por favor, preencha nome, endereço e calcule o frete!");
     }
 
-    let mensagem = `👋 *Olá! Novo Pedido Chegando!* 🛒\n\n`;
-    mensagem += `👤 *Cliente:* ${nome}\n`;
-    mensagem += `----------------------------------\n`;
-    mensagem += `📝 *RESUMO DO PEDIDO:*\n\n`;
+    let totalGeral = atualizarTotais();
+    let msg = `👋 *Novo Pedido!* 🛒\n\n👤 *Cliente:* ${nome}\n`;
+    msg += `----------------------------------\n`;
     
-    let cardsProdutos = document.querySelectorAll(".cards");
-
-    dadosProdutos.forEach((produto, index) => {
-        const card = cardsProdutos[index];
-        const quantidade = card.querySelector(".quantidade").innerText;
-        const valorTotalItem = card.querySelector(".valor").innerText;
-
-        let nomeProduto = produto.nome.replace(/<br\s*\/?>/gi, " ");
-        mensagem += `🔹 *Item ${index + 1}:* ${nomeProduto} (*${quantidade}x*)\n`;
-        mensagem += `   📏 *Tamanho:* ${produto.ml}\n`;
-        
-        if (produto.acompanhamentos && produto.acompanhamentos.length > 0) {
-            mensagem += `   ✅ *Acomp:* ${produto.acompanhamentos.join(", ")}\n`;
-        }
-        if (produto.adicionais && produto.adicionais.length > 0) {
-            mensagem += `   ➕ *Extras:* ${produto.adicionais.join(", ")}\n`;
-        }
-        mensagem += `   💰 *Subtotal:* ${valorTotalItem}\n\n`;
+    document.querySelectorAll(".cards").forEach(card => {
+        let nomeP = card.querySelector("h5").innerText;
+        let qtd = card.querySelector(".quantidade").innerText;
+        let vTotalItem = card.querySelector(".valor").innerText;
+        msg += `🔹 *${nomeP}* (${qtd}x) - ${vTotalItem}\n`;
     });
 
-    mensagem += `----------------------------------\n`;
-    mensagem += `🛵 *Taxa de Entrega:* Gs ${TAXA_ENTREGA.toLocaleString('pt-BR')}\n`;
+    msg += `----------------------------------\n`;
+    msg += `🛵 *Entrega:* Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')}\n`;
+    msg += `💰 *TOTAL:* *Gs ${totalGeral.toLocaleString('pt-BR')}*\n`;
+    msg += `📍 *Endereço:* ${endereco}\n`;
 
-    let totalReais = total / TAXA_CAMBIO;
-    mensagem += `💵 *TOTAL A PAGAR:* *Gs ${total.toLocaleString('pt-BR')}*\n`;
-    mensagem += `   (Aprox. R$ ${totalReais.toLocaleString('pt-BR', {minimumFractionDigits: 2})})\n`;
-    
-    mensagem += `----------------------------------\n`;
-    mensagem += `💳 *PAGAMENTO:*\n`;
-    mensagem += `   📌 *Forma:* ${metodoPagamentoSelecionado}\n`;
-    
-    if (metodoPagamentoSelecionado === "Dinheiro/Entrega") {
-        let valorTroco = inputTroco.value;
-        if (valorTroco.trim() !== "") {
-            mensagem += `   🔄 *Troco para:* ${valorTroco}\n`;
-        } else {
-            mensagem += `   🔄 *Troco:* Não precisa\n`;
-        }
-    }
-
-    mensagem += `----------------------------------\n`;
-    mensagem += `📍 *ENDEREÇO DE ENTREGA:*\n`;
-    mensagem += `${endereco}\n`;
-    mensagem += `----------------------------------\n`;
-    mensagem += `⏳ *Aguarde a confirmação do seu pedido!*\n`;
-
-    let numeroWhatsApp = "+595976652307"; 
-    let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-    
-    window.open(url, "_blank");
-
+    window.open(`https://wa.me/595976652307?text=${encodeURIComponent(msg)}`, "_blank");
     localStorage.removeItem('carrinho');
-    setTimeout(() => {
-        location.reload();
-    }, 1000);
+    location.reload();
 });
+
+atualizarTotais();
