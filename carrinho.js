@@ -215,6 +215,7 @@ btnFinalizarPedido.addEventListener("click", (e) => {
     let totalGeral = atualizarTotais();
     let totalReais = Math.floor(totalGeral / TAXA_CAMBIO);
     let msg = `👋 *Novo Pedido!* 🛒\n\n👤 *Cliente:* ${nome}\n`;
+    
     msg += `----------------------------------\n`;
 
     document.querySelectorAll(".cards").forEach(card => {
@@ -226,12 +227,16 @@ btnFinalizarPedido.addEventListener("click", (e) => {
 
         msg += `🔹 *${nomeProduto}* - ${ml}\n`; // Adicionamos o ML na mensagem
         msg += `   (${qtd}x) - ${valor}\n`;
-        // --------------------------
+        
     });
 
     msg += `----------------------------------\n`;
     msg += `🛵 *Entrega:* Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')}\n`;
+    msg += `----------------------------------\n`;
+    msg += `💳 *Pagamento via:* ${metodoPagamentoSelecionado}\n`
     msg += `💰 *TOTAL:* *Gs ${totalGeral.toLocaleString('pt-BR')}* (R$ ${totalReais})\n`;
+    msg += `----------------------------------\n`;
+    msg += `Endereço de entrega:`
     msg += `📍 *Endereço:* ${endereco}\n`;
 
     window.open(`https://wa.me/595976652307?text=${encodeURIComponent(msg)}`, "_blank");
