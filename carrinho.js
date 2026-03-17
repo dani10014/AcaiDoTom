@@ -30,7 +30,7 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
 function definirPrecoPorKM(distancia) {
     if (distancia < 1.0) return 0; 
     if (distancia >= 1.0 && distancia <= 2.6) return 5000;
-    if (distancia > 2.6 && distancia <= 4.0) return 10000;
+    if (distancia > 2.6 && distancia <= 4.8) return 10000;
     if (distancia > 4.0 && distancia <= 6.0) return 15000;
     return 15000; 
 }          
