@@ -48,7 +48,7 @@ function atualizarContador() {
 setInterval(atualizarContador, 1000);
 atualizarContador();
 
-/*
+
 function atualizarHora(){
     const agora = new Date();
     const horaPy = parseInt(new Intl.DateTimeFormat('pt-BR',{
@@ -82,7 +82,7 @@ function atualizarHora(){
 
 } 
 setInterval(atualizarHora, 1000);
-*/
+
 function fecharCardAberto() {
     cardAcompanhamentos.classList.remove("acompanhamentos-ativo");
     cardAcompanhamentos.innerHTML = ""; 
