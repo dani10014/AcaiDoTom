@@ -28,11 +28,19 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
 
 // --- TABELA DE PREÇOS (ÁUDIO) ---
 function definirPrecoPorKM(distancia) {
-    if (distancia < 1.0) return 0; 
-    if (distancia >= 1.0 && distancia <= 2.6) return 5000;
-    if (distancia > 2.6 && distancia <= 4.8) return 10000;
-    if (distancia > 4.0 && distancia <= 6.0) return 15000;
-    return 15000; 
+    if (distancia <= 2.0) {
+        return 6000; 
+    } 
+    // 2. De 2km até 5km = Gs 12.000 (R$ 10,00)
+    else if (distancia <= 4.8) {
+        return 12000; 
+    }
+    else if(distancia <= 7.0){
+        return 18000
+    }
+    else {
+        return 24000; 
+    }
 }          
 
 // --- CONTROLE DO MODAL DE PAGAMENTO ---
@@ -66,7 +74,7 @@ function atualizarTotais() {
     });
 
     let totalGeral = subtotalProdutos + TAXA_ENTREGA_ATUAL;
-    let valorReais = Math.floor(totalGeral / TAXA_CAMBIO);
+    let valorReais = Math.round(totalGeral / TAXA_CAMBIO);
 
     let html = `Gs ${totalGeral.toLocaleString('pt-BR')} <br><span style="font-size: 0.6em">(R$ ${valorReais.toLocaleString('pt-BR')})</span>`;
     
@@ -235,6 +243,7 @@ metodosPag.forEach((botao) => {
 });
 
 // 3. Botão Finalizar Pedido (Sem o erro de latC e pegando o pagamento certo)
+// 3. Botão Finalizar Pedido (ORGANIZADO E SEM ERROS)
 btnFinalizarPedido.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -242,17 +251,21 @@ btnFinalizarPedido.addEventListener("click", (e) => {
     let endereco = document.getElementById("endereco").value;
     let valorTroco = document.getElementById("troco").value;
 
+    // 1. Validação inicial
     if (!nome || !endereco || TAXA_ENTREGA_ATUAL === 0) {
         return alert("Preencha nome, endereço e calcule o frete!");
     }
 
-    let totalGeral = atualizarTotais();
-    let totalReais = Math.floor(totalGeral / TAXA_CAMBIO);
+    // 2. Cálculos (Uma única vez, antes de montar a mensagem)
+    let totalGeral = atualizarTotais(); 
+    let totalReais = Math.round(totalGeral / TAXA_CAMBIO); // Math.round para não perder centavos
+    let freteSozinhoReais = Math.round(TAXA_ENTREGA_ATUAL / 1200);
     
     let msg = `👋 *Novo Pedido!* 🛒\n\n`;
     msg += `👤 *Cliente:* ${nome}\n`;
     msg += `----------------------------------\n`;
 
+    // 3. Loop dos produtos
     document.querySelectorAll(".cards").forEach(card => {
         let nomeProduto = card.querySelector("h5").innerText.replace(/\n/g, ' '); 
         let qtd = card.querySelector(".quantidade").innerText;
@@ -273,6 +286,7 @@ btnFinalizarPedido.addEventListener("click", (e) => {
         msg += `   [${qtd}x] - ${valor}\n\n`;
     });
 
+    // 4. Fechamento da mensagem com os valores que o Tom quer
     msg += `----------------------------------\n`;
     msg += `💳 *Pagamento:* ${metodoPagamentoSelecionado}\n`;
     
@@ -280,12 +294,11 @@ btnFinalizarPedido.addEventListener("click", (e) => {
         msg += `💵 *Troco para:* ${valorTroco}\n`;
     }
 
-    msg += `🛵 *Entrega:* Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')}\n`;
+    msg += `🛵 *Entrega:* Gs ${TAXA_ENTREGA_ATUAL.toLocaleString('pt-BR')} (R$ ${freteSozinhoReais})\n`;
     msg += `💰 *TOTAL: Gs ${totalGeral.toLocaleString('pt-BR')}* (R$ ${totalReais})\n`;
     msg += `----------------------------------\n`;
     msg += `📍 *Endereço:* ${endereco}\n`;
 
     window.open(`https://wa.me/595976652307?text=${encodeURIComponent(msg)}`, "_blank");
 });
-// Inicialização
 renderizarCarrinho();
