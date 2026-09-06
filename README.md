@@ -27,3 +27,8 @@ Como este projeto foi desenvolvido sob demanda e focado em uma entrega ágil par
 * **Segurança Prática:** Por se tratar de uma aplicação estática (Front-end nativo), o sistema **não armazena dados em banco de dados** e **não processa pagamentos diretamente**. Toda a segurança sensível é delegada para o ecossistema do WhatsApp no momento do fechamento do pedido, tornando a aplicação leve e segura contra invasões de dados.
 
 *Este projeto representa um marco importante na minha jornada, servindo como base de estudos sobre como refatorar e organizar códigos complexos em projetos futuros.*
+
+**Imagens do projeto**
+
+<img width="248" height="535" alt="Captura de tela_2026-08-06_15-03-50" src="https://github.com/user-attachments/assets/5619a9b5-9818-4fb4-8325-f4c3c16a09b7" />
+
